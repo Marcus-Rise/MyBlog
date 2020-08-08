@@ -1,17 +1,18 @@
 import { IndexPageProps } from "../../dto/IndexPageProps";
 import React from "react";
 import { NextPage, NextPageContext } from "next";
+import { DateDisplay } from "../components/DateDisplay";
 
 const Index: NextPage<IndexPageProps> = (props) => {
     return (
-        <div>
+        <div className="container">
             {props.posts.map((i) => (
-                <React.Fragment key={i.id}>
-                    <div>
-                        {i.id} {i.title} by {i.createdBy.username} at {new Date(i.createdAt).toLocaleDateString()}
+                <div className="row" key={i.id}>
+                    <div className="col-12">
+                        {i.id} {i.title} by {i.createdBy.username} at <DateDisplay date={i.createdAt} />
                     </div>
                     <br />
-                </React.Fragment>
+                </div>
             ))}
         </div>
     );
