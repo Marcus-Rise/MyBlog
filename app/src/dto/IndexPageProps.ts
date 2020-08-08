@@ -1,3 +1,5 @@
+import { IPost } from "./IPost";
+
 export interface IndexPageProps {
-    title: string;
+    posts: IPost[];
 }

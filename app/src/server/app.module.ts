@@ -1,9 +1,9 @@
 import { Module } from "@nestjs/common";
 import { AppController } from "./app.controller";
-import { AppService } from "./app.service";
 import Next from "next";
 import { RenderModule } from "nest-next";
 import { resolve } from "path";
+import { PostModule } from "./post/post.module";
 
 @Module({
     imports: [
@@ -16,8 +16,9 @@ import { resolve } from "path";
                 viewsDir: "",
             },
         ),
+        PostModule,
     ],
     controllers: [AppController],
-    providers: [AppService],
+    providers: [],
 })
 export class AppModule {}
