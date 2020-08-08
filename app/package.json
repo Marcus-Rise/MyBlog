@@ -5,7 +5,7 @@
   "description": "Nest TypeScript starter repository",
   "license": "MIT",
   "scripts": {
-    "dev": "tsnd -r dotenv/config --ignore-watch src/client --inspect --project tsconfig.server.json src/server/main.ts",
+    "dev": "tsnd -r dotenv/config --ignore-watch src/client --inspect=0.0.0.0:9229 --project tsconfig.server.json src/server/main.ts",
     "lint": "eslint 'src/**/*.{js,ts,tsx}'",
     "lint:fix": "lint --fix",
     "test": "jest --collectCoverage=true",
