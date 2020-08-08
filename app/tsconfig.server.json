@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "outDir": "dist"
+  },
+  "include": [
+    "src/server",
+    "src/contracts",
+    "src/common"
+  ],
+  "exclude": [
+    "node_modules",
+    "src/**/*.spec.*",
+    "src/**/*.e2e-spec.*"
+  ]
+}
