@@ -8,7 +8,7 @@ const Index: NextPage<IndexPageProps> = (props) => {
             {props.posts.map((i) => (
                 <React.Fragment key={i.id}>
                     <div>
-                        {i.id} {i.title}
+                        {i.id} {i.title} by {i.createdBy.username}
                     </div>
                     <br />
                 </React.Fragment>
