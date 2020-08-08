@@ -13,7 +13,7 @@ services:
       context: app
       target: "dev"
     volumes:
-    - ./app:/app
+    - ./app:/app:rw
     ports:
     - '3000:3000'
 

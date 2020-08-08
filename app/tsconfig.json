@@ -3,7 +3,7 @@
     "target": "esnext",
     "module": "esnext",
     "moduleResolution": "node",
-    "jsx": "react",
+    "jsx": "preserve",
     "lib": [
       "dom",
       "dom.iterable",
@@ -17,10 +17,14 @@
     "experimentalDecorators": true,
     "baseUrl": "./",
     "rootDir": "./src",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "isolatedModules": true
   },
   "include": [
-    "./src"
+    "./src",
+    "./src/client/next-env.d.ts"
   ],
   "exclude": [
     "node_modules"
