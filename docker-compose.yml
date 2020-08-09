@@ -2,7 +2,9 @@ version: "3.4"
 
 services:
   admin:
-    image: strapi/strapi
+    build:
+      context: admin
+      target: "dev"
     volumes:
       - ./admin:/srv/app
     ports:
