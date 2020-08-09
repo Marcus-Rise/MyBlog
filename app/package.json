@@ -10,7 +10,10 @@
     "lint:fix": "lint --fix",
     "test": "jest --collectCoverage=true",
     "test:watch": "jest --watch",
-    "build": "rimraf dist && tsc -p tsconfig.server.json",
+    "build:clean": "rimraf src/client/.next && rimraf dist",
+    "build:client": "next build ./src/client",
+    "build:server": "tsc -p tsconfig.server.json",
+    "build": "npm run build:clean && npm run build:client && npm run build:server",
     "start": "cross-env NODE_ENV=production node dist/server/main.js"
   },
   "dependencies": {
@@ -25,7 +28,6 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "reflect-metadata": "^0.1.13",
-    "rimraf": "^3.0.2",
     "rxjs": "^6.5.5",
     "sass": "^1.26.10"
   },
@@ -46,6 +48,7 @@
     "eslint-plugin-import": "^2.20.2",
     "jest": "^26.0.1",
     "prettier": "^2.0.5",
+    "rimraf": "^3.0.2",
     "supertest": "^4.0.2",
     "ts-jest": "^26.1.0",
     "ts-loader": "^7.0.5",

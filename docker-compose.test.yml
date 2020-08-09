@@ -1,0 +1,17 @@
+version: "3.4"
+
+services:
+  admin:
+    image: strapi/strapi
+    volumes:
+      - ./admin:/srv/app
+    ports:
+     - '1337:1337'
+
+  app:
+    build:
+      context: app
+      target: "prod"
+    ports:
+    - '3000:3000'
+

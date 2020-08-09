@@ -7,7 +7,7 @@ USER node
 
 CMD npm install --quiet && npm run dev
 
-FROM node:${NODE_VERSION}-alpine AS prod
+FROM node:${NODE_VERSION}-alpine AS build
 WORKDIR /app
 
 COPY package*.json ./
@@ -21,6 +21,13 @@ COPY ./*.js* ./
 #RUN npm run test
 RUN npm run build
 
-CMD npm run start
+FROM node:${NODE_VERSION}-alpine as prod
+WORKDIR /app
 
-EXPOSE 3000
+COPY --from=build /app/package*.json ./
+
+RUN npm ci --only=prod
+
+COPY --from=build /app/dist ./dist
+
+CMD npm run start

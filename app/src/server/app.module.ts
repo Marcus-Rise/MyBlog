@@ -5,12 +5,14 @@ import { RenderModule } from "nest-next";
 import { resolve } from "path";
 import { PostModule } from "./post/post.module";
 
+const dev = process.env.NODE_ENV !== "production";
+
 @Module({
     imports: [
         RenderModule.forRootAsync(
             Next({
-                dev: process.env.NODE_ENV !== "production",
-                dir: resolve(__dirname, "../client"),
+                dev,
+                dir: dev ? resolve(__dirname, "../client") : resolve(__dirname, "../../dist/client"),
             }),
             {
                 viewsDir: "",

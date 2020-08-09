@@ -16,11 +16,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "baseUrl": "./",
-    "rootDir": "./src",
-    "resolveJsonModule": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "isolatedModules": true
+    "rootDir": "./src"
   },
   "include": [
     "./src",
