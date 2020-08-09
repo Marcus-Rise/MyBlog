@@ -8,15 +8,15 @@ services:
     volumes:
       - ./admin:/srv/app
     ports:
-     - '1337:1337'
+      - '1337:1337'
 
   app:
     build:
       context: app
       target: "dev"
     volumes:
-    - ./app:/app:rw
+      - ./app:/app:rw
     ports:
-    - '3000:3000'
-    - '9229:9229'
+      - '3000:3000'
+      - '9229:9229'
 

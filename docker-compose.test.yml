@@ -8,12 +8,12 @@ services:
     volumes:
       - ./admin/.tmp:/app/.tmp
     ports:
-     - '1337:1337'
+      - '1337:1337'
 
   app:
     build:
       context: app
       target: "prod"
     ports:
-    - '3000:3000'
+      - '3000:3000'
 
