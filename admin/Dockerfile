@@ -3,13 +3,13 @@ WORKDIR /app
 
 USER node
 
-FROM base as dev
+FROM base AS dev
 
 CMD npm run develop
 
 EXPOSE 1337
 
-FROM strapi/base as prod
+FROM strapi/base AS prod
 
 COPY ./package*.json ./
 
