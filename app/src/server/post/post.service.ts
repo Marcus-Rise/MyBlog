@@ -1,9 +1,9 @@
-import { HttpService, Injectable } from "@nestjs/common";
+import { HttpService, Injectable, Logger } from "@nestjs/common";
 import { IPostStrApiDto, Post } from "./post";
 
 @Injectable()
 export class PostService {
-    constructor(private readonly http: HttpService) {}
+    constructor(private readonly http: HttpService, private readonly logger: Logger) {}
 
     async get(): Promise<Post[]> {
         let posts: Post[] = [];
@@ -14,7 +14,9 @@ export class PostService {
             .then((data) => {
                 posts = data.data.map((i) => new Post(i));
             })
-            .catch(console.error);
+            .catch((e) => {
+                this.logger.error(e.response.data, undefined, PostService.name);
+            });
 
         return posts;
     }
