@@ -11,7 +11,7 @@ module.exports = ({ env }) => {
     admin: {
       url: url + "/dashboard",
       auth: {
-        secret: env("ADMIN_JWT_SECRET", "2c32a9a7d61de13c8819ea41566884dd"),
+        secret: env("ADMIN_JWT_SECRET", "!change_me!"),
       },
     },
   };
