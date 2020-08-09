@@ -7,8 +7,8 @@ services:
       target: "prod"
     volumes:
       - ./admin/.tmp:/app/.tmp
-    ports:
-      - '1337:1337'
+    environment:
+      DOMAIN: admin.${DOMAIN}
 
   app:
     build:
@@ -24,11 +24,24 @@ services:
     links:
       - app
       - admin
-    ports:
-      - 8080:80
     volumes:
       - static:/etc/nginx/html/_next:ro
 
+  ingress:
+    build:
+      context: docker/ingress
+    links:
+      - web
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ssl:/var/lib/https-portal
+    environment:
+      STAGE: local
+      DOMAINS: '${DOMAIN} -> http://web, admin.${DOMAIN} -> http://admin:1337'
+      ACCESS_LOG: 'true'
+
 volumes:
   static:
-
+  ssl:
