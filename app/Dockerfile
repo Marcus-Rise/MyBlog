@@ -12,10 +12,14 @@ COPY package*.json ./
 
 RUN npm ci
 
-COPY ./ .
+COPY ./src src
+COPY ./.eslintrc.js .eslintrc.js
+COPY ./.prettierrc.js .prettierrc.js
+COPY ./jest.config.js jest.config.js
+COPY ./tsconfig.json tsconfig.server.json
 
-RUN npm run lint
-RUN npm run test
+#RUN npm run lint
+#RUN npm run test
 RUN npm run build
 RUN cp -r dist build_backup
 
