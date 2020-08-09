@@ -27,6 +27,8 @@ services:
     links:
       - app
       - admin
+    ports:
+      - 8080:80
     volumes:
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
       - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
