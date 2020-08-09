@@ -7,9 +7,8 @@ module.exports = ({ env }) => {
   return {
     host,
     port,
-    url: url + "/admin/",
+    url,
     admin: {
-      url: url + "/dashboard",
       auth: {
         secret: env("ADMIN_JWT_SECRET", "2c32a9a7d61de13c8819ea41566884dd"),
       },

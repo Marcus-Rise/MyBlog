@@ -10,7 +10,7 @@ services:
     ports:
       - '4000:1337'
     environment:
-      DOMAIN: ${DOMAIN}
+      DOMAIN: admin.${DOMAIN}
 
   app:
     build:
@@ -49,7 +49,7 @@ services:
       - ssl:/var/lib/https-portal
     environment:
       STAGE: local
-      DOMAINS: '${DOMAIN} -> http://web:80'
+      DOMAINS: '${DOMAIN} -> http://web, admin.${DOMAIN} -> http://admin:1337'
       ACCESS_LOG: 'true'
 
 volumes:
