@@ -3,24 +3,35 @@ ARG NODE_VERSION=14
 FROM node:$NODE_VERSION AS dev
 WORKDIR /app
 
-CMD npm install && npm run dev
+USER node
 
-FROM node:${NODE_VERSION}-alpine AS prod
+CMD npm install --quiet && npm run dev
+
+EXPOSE 3000
+
+FROM node:${NODE_VERSION}-alpine AS build
 WORKDIR /app
 
 COPY package*.json ./
 
 RUN npm ci
 
-COPY ./ .
+COPY ./src ./src
+COPY ./*.js* ./
 
-RUN npm run lint
-RUN npm run test
+#RUN npm run lint
+#RUN npm run test
 RUN npm run build
-RUN cp -r dist build_backup
 
-CMD rm -rf dist/* \
-    && cp -r build_backup/* dist \
-    && npm run start
+FROM node:${NODE_VERSION}-alpine as prod
+WORKDIR /app
+
+COPY --from=build /app/package*.json ./
+
+RUN npm ci --only=prod
+
+COPY --from=build /app/dist ./dist
+
+CMD npm run start
 
 EXPOSE 3000

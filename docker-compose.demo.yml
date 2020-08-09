@@ -4,36 +4,30 @@ services:
   admin:
     build:
       context: admin
-      target: "dev"
+      target: "prod"
+      args:
+        DOMAIN: ${DOMAIN}
     volumes:
-      - ./admin:/app
+      - ./admin/.tmp:/app/.tmp
     environment:
       DOMAIN: ${DOMAIN}
 
   app:
     build:
       context: app
-      target: "dev"
+      target: "prod"
     volumes:
-      - ./app:/app:rw
-    ports:
-      - '3000:3000'
-      - '9229:9229'
+      - static:/app/dist/client/.next
 
   web:
     build:
       context: docker/nginx
-      target: "dev"
+      target: "prod"
     links:
       - app
       - admin
-    ports:
-      - 8080:80
     volumes:
-      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
-      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./docker/nginx/502.html:/etc/nginx/html/502.html
-      - ./app/src/client/.next:/etc/nginx/html/_next
+      - static:/etc/nginx/html/_next:ro
 
   ingress:
     build:
@@ -51,4 +45,5 @@ services:
       ACCESS_LOG: 'true'
 
 volumes:
+  static:
   ssl:
