@@ -6,9 +6,11 @@ services:
       context: admin
       target: "dev"
     volumes:
-      - ./admin:/srv/app
+      - ./admin:/app
     ports:
-      - '1337:1337'
+      - '4000:1337'
+    environment:
+      DOMAIN: ${DOMAIN}
 
   app:
     build:
@@ -34,3 +36,21 @@ services:
       - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./docker/nginx/502.html:/etc/nginx/html/502.html
       - ./app/src/client/.next:/etc/nginx/html/_next
+
+  ingress:
+    build:
+      context: docker/ingress
+    links:
+      - web
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ssl:/var/lib/https-portal
+    environment:
+      STAGE: local
+      DOMAINS: '${DOMAIN} -> http://web:80'
+      ACCESS_LOG: 'true'
+
+volumes:
+  ssl:

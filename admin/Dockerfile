@@ -1,9 +1,15 @@
-FROM strapi/strapi as dev
+FROM strapi/base AS base
+WORKDIR /app
+
+USER node
+
+FROM base as dev
+
+CMD npm run develop
 
 EXPOSE 1337
 
 FROM strapi/base as prod
-WORKDIR /app
 
 COPY ./package*.json ./
 
