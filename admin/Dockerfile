@@ -22,7 +22,10 @@ COPY ./public ./public
 COPY ./favicon.ico ./favicon.ico
 
 ENV NODE_ENV production
+ARG DOMAIN
+ENV DOMAIN ${DOMAIN}
 
+RUN echo "domain is ${DOMAIN}"
 RUN npm run build
 
 CMD npm run start

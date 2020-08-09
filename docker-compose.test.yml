@@ -5,6 +5,8 @@ services:
     build:
       context: admin
       target: "prod"
+      args:
+        DOMAIN: ${DOMAIN}
     volumes:
       - ./admin/.tmp:/app/.tmp
     environment:
