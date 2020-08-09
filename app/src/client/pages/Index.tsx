@@ -11,7 +11,6 @@ const Index: NextPage<IndexPageProps> = (props) => {
                     <div className="col-12">
                         {i.id} {i.title} by {i.createdBy.username} at <DateDisplay date={i.createdAt} />
                     </div>
-                    <br />
                 </div>
             ))}
         </div>
