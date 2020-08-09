@@ -15,7 +15,11 @@ COPY ./package*.json ./
 
 RUN npm ci
 
-COPY . .
+COPY ./api ./api
+COPY ./config ./config
+COPY ./extensions ./extensions
+COPY ./public ./public
+COPY ./favicon.ico ./favicon.ico
 
 ENV NODE_ENV production
 
