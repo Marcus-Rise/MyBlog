@@ -7,6 +7,8 @@ USER node
 
 CMD npm install --quiet && npm run dev
 
+EXPOSE 3000
+
 FROM node:${NODE_VERSION}-alpine AS build
 WORKDIR /app
 
@@ -31,3 +33,5 @@ RUN npm ci --only=prod
 COPY --from=build /app/dist ./dist
 
 CMD npm run start
+
+EXPOSE 3000
