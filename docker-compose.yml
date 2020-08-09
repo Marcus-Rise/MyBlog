@@ -8,7 +8,7 @@ services:
     volumes:
       - ./admin:/app
     environment:
-      DOMAIN: admin.${DOMAIN}
+      DOMAIN: ${DOMAIN}
 
   app:
     build:
@@ -45,7 +45,7 @@ services:
       - ssl:/var/lib/https-portal
     environment:
       STAGE: local
-      DOMAINS: '${DOMAIN} -> http://web, admin.${DOMAIN} -> http://admin:1337'
+      DOMAINS: '${DOMAIN} -> http://web'
       ACCESS_LOG: 'true'
 
 volumes:
