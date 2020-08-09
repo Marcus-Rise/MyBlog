@@ -24,6 +24,8 @@ COPY ./favicon.ico ./favicon.ico
 ENV NODE_ENV production
 ARG DOMAIN
 ENV DOMAIN ${DOMAIN}
+ARG ADMIN_JWT_SECRET
+ENV ADMIN_JWT_SECRET ${ADMIN_JWT_SECRET}
 
 RUN echo "domain is ${DOMAIN}"
 RUN npm run build

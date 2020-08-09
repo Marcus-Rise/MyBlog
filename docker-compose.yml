@@ -7,13 +7,34 @@ services:
       target: "dev"
     volumes:
       - ./admin:/app
+    links:
+      - db
     environment:
       DOMAIN: ${DOMAIN}
+      ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
+      DATABASE_CLIENT: ${DATABASE_CLIENT}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_HOST: ${DATABASE_HOST}
+      DATABASE_PORT: ${DATABASE_PORT}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+    volumes:
+      - ./docker/postgres/data:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
 
   app:
     build:
       context: app
       target: "dev"
+    links:
+      - admin
     volumes:
       - ./app:/app:rw
     ports:
