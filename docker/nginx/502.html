@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="25"/>
+    <title>Тех.обслуживание</title>
+    <style>
+        body {
+            text-align: center;
+            padding: 150px;
+        }
+
+        h1 {
+            font-size: 50px;
+        }
+
+        body {
+            font: 20px Helvetica, sans-serif;
+            color: #333;
+        }
+
+        article {
+            display: block;
+            text-align: left;
+            width: 650px;
+            margin: 0 auto;
+        }
+
+        a {
+            color: #dc8100;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #333;
+            text-decoration: none;
+        }
+
+        input {
+            border: none;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+<article>
+    <h1>Сайт на тех.обслуживании!</h1>
+    <div>
+        <p>Извините, сайт на тех.обслуживании, повторная попытка соединения будет выполнена автоматически!</p>
+        <p>&mdash; Команда разработчиков</p>
+    </div>
+    <p>Следующая попытка через: <b><span id="timer">25</span> сек.</b></p>
+</article>
+
+<script type="text/javascript">
+    var TimerVal = 25;
+    var TimerSPan = document.getElementById("timer");
+    TimerSPan.innerText = TimerVal;
+
+    setInterval(() => {
+        TimerSPan.innerText = TimerVal;
+        TimerVal = TimerVal - 1;
+        if (TimerVal < 0) {
+            TimerVal = 0;
+            location.reload();
+        }
+    }, 1000);
+</script>
+</body>
+</html>
