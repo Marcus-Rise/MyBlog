@@ -61,6 +61,3 @@ services:
       STAGE: local
       DOMAINS: '${DOMAIN}'
       ACCESS_LOG: 'true'
-
-volumes:
-  ssl:
