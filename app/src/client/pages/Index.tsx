@@ -9,7 +9,10 @@ const Index: NextPage<IndexPageProps> = (props) => {
             {props.posts.map((i) => (
                 <div className="row" key={i.id}>
                     <div className="col-12">
-                        {i.id} {i.title} by {i.createdBy.username} at <DateDisplay date={i.createdAt} />
+                        <p>
+                            {i.id} <b>{i.title}</b> by {i.createdBy.username} at <DateDisplay date={i.createdAt} />
+                        </p>
+                        <p>{i.description}</p>
                     </div>
                 </div>
             ))}

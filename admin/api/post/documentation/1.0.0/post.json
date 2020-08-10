@@ -526,6 +526,9 @@
           "title": {
             "type": "string"
           },
+          "description": {
+            "type": "string"
+          },
           "created_by": {
             "required": [
               "id",
@@ -622,6 +625,9 @@
         ],
         "properties": {
           "title": {
+            "type": "string"
+          },
+          "description": {
             "type": "string"
           },
           "created_by": {
