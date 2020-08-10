@@ -2,7 +2,8 @@ version: "3.4"
 
 services:
   db:
-    image: postgres
+    build:
+      context: docker/postgres
     environment:
       POSTGRES_USER: ${DATABASE_USERNAME}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
