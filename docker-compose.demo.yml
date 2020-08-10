@@ -1,14 +1,22 @@
 version: "3.4"
 
 services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+    volumes:
+      - ./docker/postgres/data:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+
   admin:
     build:
       context: admin
       target: "prod"
       args:
         DOMAIN: ${DOMAIN}
-    volumes:
-      - ./admin/.tmp:/app/.tmp
     links:
       - db
     environment:
@@ -20,15 +28,6 @@ services:
       DATABASE_PORT: ${DATABASE_PORT}
       DATABASE_USERNAME: ${DATABASE_USERNAME}
       DATABASE_PASSWORD: ${DATABASE_PASSWORD}
-  db:
-    image: postgres
-    environment:
-      POSTGRES_USER: ${DATABASE_USERNAME}
-      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
-    volumes:
-      - ./docker/postgres/data:/var/lib/postgresql/data
-    ports:
-      - '5432:5432'
 
   app:
     build:
@@ -39,29 +38,22 @@ services:
     links:
       - admin
 
-  web:
+  ingress:
     build:
-      context: docker/nginx
+      context: docker/ingress
       target: "prod"
     links:
       - app
       - admin
-    volumes:
-      - static:/etc/nginx/html/_next:ro
-
-  ingress:
-    build:
-      context: docker/ingress
-    links:
-      - web
     ports:
       - 80:80
       - 443:443
     volumes:
       - ssl:/var/lib/https-portal
+      - static:/etc/nginx/html/_next:ro
     environment:
       STAGE: local
-      DOMAINS: '${DOMAIN} -> http://web'
+      DOMAINS: '${DOMAIN}'
       ACCESS_LOG: 'true'
 
 volumes:
