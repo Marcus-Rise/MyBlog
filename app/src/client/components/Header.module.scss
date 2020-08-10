@@ -1,0 +1,10 @@
+.header {
+  background-color: #445768;
+  height: 4rem;
+  color: white;
+  padding: 0.5rem 0;
+
+  @media screen and (max-width: 576px) {
+    height: 3.5rem;
+  }
+}
