@@ -50,7 +50,7 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - ssl:/var/lib/https-portal
+      - ./docker/ingress/ssl:/var/lib/https-portal
       - static:/etc/nginx/html/_next:ro
     environment:
       STAGE: local

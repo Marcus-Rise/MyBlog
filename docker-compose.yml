@@ -53,7 +53,7 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - ssl:/var/lib/https-portal
+      - ./docker/ingress/ssl:/var/lib/https-portal
       - ./docker/ingress/default.ssl.conf.erb:/var/lib/nginx-conf/default.ssl.conf.erb:ro
       - ./docker/ingress/502.html:/etc/nginx/html/502.html
       - ./app/src/client/.next:/etc/nginx/html/_next
