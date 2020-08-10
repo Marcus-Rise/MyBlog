@@ -1,18 +1,20 @@
 import { IndexPageProps } from "../../dto/IndexPageProps";
 import React from "react";
 import { NextPage, NextPageContext } from "next";
-import { DateDisplay } from "../components/DateDisplay";
+import { PostCard } from "../components/PostCard";
 
 const Index: NextPage<IndexPageProps> = (props) => {
     return (
-        <div className="container">
+        <div className="container pt-5">
             {props.posts.map((i) => (
-                <div className="row" key={i.id}>
+                <div className="row mb-3" key={i.id}>
                     <div className="col-12">
-                        <p>
-                            {i.id} <b>{i.title}</b> by {i.createdBy.username} at <DateDisplay date={i.createdAt} />
-                        </p>
-                        <p>{i.description}</p>
+                        <PostCard
+                            title={i.title}
+                            description={i.description}
+                            createdBy={i.createdBy.username}
+                            createdAt={i.createdAt}
+                        />
                     </div>
                 </div>
             ))}
