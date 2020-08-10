@@ -5,6 +5,7 @@ import { UserDto } from "../user/user.dto";
 
 export class PostDto implements IPost {
     title: string;
+    description: string;
     id: string;
     createdBy: IUser;
     createdAt: string;
@@ -13,6 +14,7 @@ export class PostDto implements IPost {
 
     constructor(post: Post) {
         this.title = post.title;
+        this.description = post.description;
         this.id = post.id;
         this.createdBy = new UserDto(post.createdBy);
         this.updatedBy = new UserDto(post.updatedBy);
