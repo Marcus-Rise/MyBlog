@@ -21,7 +21,7 @@ COPY ./*.js* ./
 
 #RUN npm run lint
 #RUN npm run test
-RUN npm run build
+RUN npm run build && cp -r dist/client/.next client_backup
 
 FROM node:${NODE_VERSION}-alpine as prod
 WORKDIR /app
@@ -31,7 +31,10 @@ COPY --from=build /app/package*.json ./
 RUN npm ci --only=prod
 
 COPY --from=build /app/dist ./dist
+COPY --from=build /app/client_backup ./client_backup
 
-CMD npm run start
+CMD rm -rf dist/client/.next/* \
+    && cp -r client_backup/* dist/client/.next \
+    && npm run start
 
 EXPOSE 3000
