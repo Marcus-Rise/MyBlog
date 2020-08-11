@@ -16,6 +16,13 @@
     },
     "description": {
       "type": "text"
+    },
+    "text": {
+      "type": "richtext"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
     }
   }
 }

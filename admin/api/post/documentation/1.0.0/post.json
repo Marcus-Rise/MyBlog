@@ -529,6 +529,12 @@
           "description": {
             "type": "string"
           },
+          "text": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "uid"
+          },
           "created_by": {
             "required": [
               "id",
@@ -629,6 +635,12 @@
           },
           "description": {
             "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "uid"
           },
           "created_by": {
             "type": "string"

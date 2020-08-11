@@ -4,6 +4,7 @@ export class Post {
     id: string;
     title: string;
     description: string;
+    text: string;
     createdBy: User;
     updatedBy: User;
     createdAt: Date;
@@ -14,6 +15,7 @@ export class Post {
         id?: string,
         title?: string,
         description?: string,
+        text?: string,
         createdBy?: User,
         updatedBy?: User,
         createdAt?: Date,
@@ -23,6 +25,7 @@ export class Post {
         idOrDto: string | IPostStrApiDto = "",
         title: string = "",
         description: string = "",
+        text: string = "",
         createdBy: User = new User(),
         updatedBy: User = new User(),
         createdAt: Date = new Date(),
@@ -31,6 +34,7 @@ export class Post {
         if (typeof idOrDto !== "string") {
             this.title = idOrDto.title;
             this.description = idOrDto.description;
+            this.text = idOrDto.text;
             this.id = idOrDto.id;
             this.createdBy = new User(idOrDto.created_by);
             this.updatedBy = new User(idOrDto.updated_by);
@@ -40,6 +44,7 @@ export class Post {
             this.id = idOrDto;
             this.title = title;
             this.description = description;
+            this.text = text;
             this.createdBy = createdBy;
             this.updatedBy = updatedBy;
             this.createdAt = createdAt;
@@ -50,8 +55,10 @@ export class Post {
 
 export interface IPostStrApiDto {
     id: string;
+    slug: string;
     title: string;
     description: string;
+    text: string;
     created_by: IUserStrApiDto;
     updated_by: IUserStrApiDto;
     created_at: string;

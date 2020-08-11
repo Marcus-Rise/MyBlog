@@ -9,7 +9,7 @@ export class AppController {
 
     @Get()
     @Render("Index")
-    async getHello(): Promise<IndexPageProps> {
+    async index(): Promise<IndexPageProps> {
         const posts = await this.postService.get();
 
         return { posts: posts.map((i) => new PostDto(i)) };

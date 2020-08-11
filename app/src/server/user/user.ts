@@ -33,7 +33,7 @@ export class User {
             this.id = idOrDto.id;
             this.firstname = idOrDto.firstname;
             this.lastname = idOrDto.lastname;
-            this.username = idOrDto.username;
+            this.username = idOrDto.username ?? "";
             this.email = idOrDto.email;
             this.isActive = idOrDto.isActive;
             this.roles = idOrDto.roles;
@@ -55,7 +55,7 @@ export interface IUserStrApiDto {
     id: string;
     firstname: string;
     lastname: string;
-    username: string;
+    username: string | null;
     email: string;
     password: string;
     resetPasswordToken: string;
