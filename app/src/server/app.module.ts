@@ -20,7 +20,5 @@ const dev = process.env.NODE_ENV !== "production";
         ),
         PostModule,
     ],
-    controllers: [AppController],
-    providers: [],
 })
 export class AppModule {}

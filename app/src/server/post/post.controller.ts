@@ -2,10 +2,19 @@ import { Controller, Get, NotFoundException, Param, Render } from "@nestjs/commo
 import { PostService } from "./post.service";
 import { PostPageProps } from "../../dto/PostPageProps";
 import { PostDto } from "./post.dto";
+import { IndexPageProps } from "../../dto/IndexPageProps";
 
 @Controller()
 export class PostController {
     constructor(private readonly postService: PostService) {}
+
+    @Get()
+    @Render("Index")
+    async index(): Promise<IndexPageProps> {
+        const posts = await this.postService.get();
+
+        return { posts: posts.map((i) => new PostDto(i)) };
+    }
 
     @Get("/post/:slug")
     @Render("Post")

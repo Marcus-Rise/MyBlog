@@ -3,6 +3,7 @@ import { IUserStrApiDto, User } from "../user/user";
 export class Post {
     id: string;
     title: string;
+    slug: string;
     description: string;
     text: string;
     createdBy: User;
@@ -14,6 +15,7 @@ export class Post {
     constructor(
         id?: string,
         title?: string,
+        slug?: string,
         description?: string,
         text?: string,
         createdBy?: User,
@@ -24,6 +26,7 @@ export class Post {
     constructor(
         idOrDto: string | IPostStrApiDto = "",
         title: string = "",
+        slug: string = "",
         description: string = "",
         text: string = "",
         createdBy: User = new User(),
@@ -33,6 +36,7 @@ export class Post {
     ) {
         if (typeof idOrDto !== "string") {
             this.title = idOrDto.title;
+            this.slug = idOrDto.slug;
             this.description = idOrDto.description;
             this.text = idOrDto.text;
             this.id = idOrDto.id;
@@ -43,6 +47,7 @@ export class Post {
         } else {
             this.id = idOrDto;
             this.title = title;
+            this.slug = slug;
             this.description = description;
             this.text = text;
             this.createdBy = createdBy;
