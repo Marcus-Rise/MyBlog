@@ -3,8 +3,6 @@ ARG NODE_VERSION=14
 FROM node:$NODE_VERSION AS dev
 WORKDIR /app
 
-USER node
-
 CMD npm install --quiet && npm run dev
 
 EXPOSE 3000

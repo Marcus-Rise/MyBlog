@@ -1,8 +1,8 @@
 import { Controller, Get, NotFoundException, Param, Render } from "@nestjs/common";
 import { PostService } from "./post.service";
-import { POST_PAGE_URL, PostPageProps } from "../../dto/PostPageProps";
+import { POST_PAGE_URL, PostPageProps } from "../../client/dto/PostPageProps";
 import { PostDto } from "./post.dto";
-import { INDEX_PAGE_URL, IndexPageProps } from "../../dto/IndexPageProps";
+import { INDEX_PAGE_URL, IndexPageProps } from "../../client/dto/IndexPageProps";
 
 @Controller()
 export class PostController {

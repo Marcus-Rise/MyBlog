@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Header.module.scss";
 import Link from "next/link";
-import { INDEX_PAGE_URL } from "../../dto/IndexPageProps";
+import { INDEX_PAGE_URL } from "../dto/IndexPageProps";
 
 export const Header: React.FC = () => {
     return (

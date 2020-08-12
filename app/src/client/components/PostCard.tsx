@@ -2,7 +2,7 @@ import React from "react";
 import { DateDisplay } from "./DateDisplay";
 import Link from "next/link";
 import styles from "./PostCard.module.scss";
-import { POST_PAGE_URL } from "../../dto/PostPageProps";
+import { POST_PAGE_URL } from "../dto/PostPageProps";
 
 interface IProps {
     title: string;
