@@ -20,14 +20,13 @@ COPY ./*.js* ./
 #RUN npm run lint
 #RUN npm run test
 RUN npm run build && cp -r dist/client/.next client_backup
+RUN npm ci --only=prod
 
 FROM node:${NODE_VERSION}-alpine as prod
 WORKDIR /app
 
 COPY --from=build /app/package*.json ./
-
-RUN npm ci --only=prod
-
+COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/client_backup ./client_backup
 
