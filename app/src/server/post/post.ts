@@ -25,10 +25,10 @@ export class Post {
     );
     constructor(
         idOrDto: string | IPostStrApiDto = "",
-        title: string = "",
-        slug: string = "",
-        description: string = "",
-        text: string = "",
+        title = "",
+        slug = "",
+        description = "",
+        text = "",
         createdBy: User = new User(),
         updatedBy: User = new User(),
         createdAt: Date = new Date(),

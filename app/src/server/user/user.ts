@@ -21,12 +21,12 @@ export class User {
     );
     constructor(
         idOrDto: IUserStrApiDto | string = "",
-        firstname: string = "",
-        lastname: string = "",
-        username: string = "",
-        email: string = "",
-        isActive: boolean = false,
-        blocked: boolean = false,
+        firstname = "",
+        lastname = "",
+        username = "",
+        email = "",
+        isActive = false,
+        blocked = false,
         roles: string[] = [],
     ) {
         if (typeof idOrDto !== "string") {
