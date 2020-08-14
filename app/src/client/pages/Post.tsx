@@ -1,6 +1,6 @@
 import React from "react";
 import { NextPage, NextPageContext } from "next";
-import { PostPageProps } from "../../dto/PostPageProps";
+import { PostPageProps } from "../dto/PostPageProps";
 import { DateDisplay } from "../components/DateDisplay";
 import ReactMarkdown from "react-markdown";
 

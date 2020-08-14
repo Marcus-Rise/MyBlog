@@ -1,4 +1,4 @@
-import { IndexPageProps } from "../../dto/IndexPageProps";
+import { IndexPageProps } from "../dto/IndexPageProps";
 import React from "react";
 import { NextPage, NextPageContext } from "next";
 import { PostCard } from "../components/PostCard";

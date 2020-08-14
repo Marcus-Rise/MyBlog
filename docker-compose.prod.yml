@@ -2,9 +2,7 @@ version: "3.4"
 
 services:
   db:
-    build:
-      context: docker/postgres
-      target: "dev"
+    image: ${CONTAINER_REGISTRY}-db
     environment:
       POSTGRES_USER: ${DATABASE_USERNAME}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
@@ -14,11 +12,7 @@ services:
       - '5432:5432'
 
   admin:
-    build:
-      context: admin
-      target: "dev"
-    volumes:
-      - ./admin:/app
+    image: ${CONTAINER_REGISTRY}-admin
     links:
       - db
     environment:
@@ -32,21 +26,14 @@ services:
       DATABASE_PASSWORD: ${DATABASE_PASSWORD}
 
   app:
-    build:
-      context: app
-      target: "dev"
+    image: ${CONTAINER_REGISTRY}-app
+    volumes:
+      - static:/app/dist/client/.next
     links:
       - admin
-    volumes:
-      - ./app:/app:rw
-    ports:
-      - '3000:3000'
-      - '9229:9229'
 
   ingress:
-    build:
-      context: docker/ingress
-      target: "dev"
+    image: ${CONTAINER_REGISTRY}-ingress
     links:
       - app
       - admin
@@ -55,10 +42,11 @@ services:
       - 443:443
     volumes:
       - ./docker/ingress/ssl:/var/lib/https-portal
-      - ./docker/ingress/default.ssl.conf.erb:/var/lib/nginx-conf/default.ssl.conf.erb:ro
-      - ./docker/ingress/502.html:/etc/nginx/html/502.html:ro
-      - ./app/src/client/.next:/etc/nginx/html/_next:ro
+      - static:/etc/nginx/html/_next:ro
     environment:
       STAGE: local
       DOMAINS: '${DOMAIN}'
       ACCESS_LOG: 'true'
+
+volumes:
+  static:

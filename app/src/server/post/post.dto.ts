@@ -1,6 +1,6 @@
 import { Post } from "./post";
-import { IPost } from "../../dto/IPost";
-import { IUser } from "../../dto/IUser";
+import { IPost } from "../../client/dto/IPost";
+import { IUser } from "../../client/dto/IUser";
 import { UserDto } from "../user/user.dto";
 
 export class PostDto implements IPost {
