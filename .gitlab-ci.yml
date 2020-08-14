@@ -20,7 +20,7 @@ build:
   script:
     - echo ${IMAGE_STAGED}
     - docker build --target prod -t ${IMAGE_STAGED}-db docker/postgres
-    - docker build --target prod -t ${IMAGE_STAGED}-admin admin
+    - docker build --target prod --build-arg DOMAIN=${DOMAIN} -t ${IMAGE_STAGED}-admin admin
     - docker build --target prod -t ${IMAGE_STAGED}-app app
     - docker build --target prod -t ${IMAGE_STAGED}-ingress docker/ingress
     - docker push ${IMAGE_STAGED}-db
