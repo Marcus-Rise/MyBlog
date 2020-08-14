@@ -1,0 +1,50 @@
+stages:
+  - build
+  - prepare
+
+services:
+  - docker:dind
+
+variables:
+  IMAGE_STAGED: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}
+  IMAGE_RELEASE: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}
+
+before_script:
+  - export DOCKER_BUILDKIT=1
+  - export COMPOSE_DOCKER_CLI_BUILD=1
+  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+
+build:
+  stage: build
+  tags:
+    - build
+  script:
+    - echo ${IMAGE_STAGED}
+    - docker build --target prod -t ${IMAGE_STAGED}-db docker/postgres
+    - docker build --target prod -t ${IMAGE_STAGED}-admin admin
+    - docker build --target prod -t ${IMAGE_STAGED}-app app
+    - docker build --target prod -t ${IMAGE_STAGED}-ingress docker/ingress
+    - docker push ${IMAGE_STAGED}-db
+    - docker push ${IMAGE_STAGED}-admin
+    - docker push ${IMAGE_STAGED}-app
+    - docker push ${IMAGE_STAGED}-ingress
+
+rename:
+  stage: prepare
+  only:
+    - tags
+  dependencies:
+    - build
+  tags:
+    - build
+  script:
+    - docker image tag ${IMAGE_STAGED}-db ${IMAGE_RELEASE}-db
+    - docker image tag ${IMAGE_STAGED}-admin ${IMAGE_RELEASE}-admin
+    - docker image tag ${IMAGE_STAGED}-app ${IMAGE_RELEASE}-app
+    - docker image tag ${IMAGE_STAGED}-ingress ${IMAGE_RELEASE}-ingress
+    - docker push ${IMAGE_RELEASE}-db
+    - docker push ${IMAGE_RELEASE}-admin
+    - docker push ${IMAGE_RELEASE}-app
+    - docker push ${IMAGE_RELEASE}-ingress
+
+
