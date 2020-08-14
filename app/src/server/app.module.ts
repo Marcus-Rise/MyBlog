@@ -1,5 +1,4 @@
 import { Module } from "@nestjs/common";
-import { AppController } from "./app.controller";
 import Next from "next";
 import { RenderModule } from "nest-next";
 import { resolve } from "path";
@@ -20,7 +19,5 @@ const dev = process.env.NODE_ENV !== "production";
         ),
         PostModule,
     ],
-    controllers: [AppController],
-    providers: [],
 })
 export class AppModule {}

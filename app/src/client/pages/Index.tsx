@@ -1,4 +1,4 @@
-import { IndexPageProps } from "../../dto/IndexPageProps";
+import { IndexPageProps } from "../dto/IndexPageProps";
 import React from "react";
 import { NextPage, NextPageContext } from "next";
 import { PostCard } from "../components/PostCard";
@@ -11,6 +11,7 @@ const Index: NextPage<IndexPageProps> = (props) => {
                     <div className="col-12">
                         <PostCard
                             title={i.title}
+                            slug={i.slug}
                             description={i.description}
                             createdBy={i.createdBy.username}
                             createdAt={i.createdAt}

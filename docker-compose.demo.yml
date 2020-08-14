@@ -4,6 +4,7 @@ services:
   db:
     build:
       context: docker/postgres
+      target: "prod"
     environment:
       POSTGRES_USER: ${DATABASE_USERNAME}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}

@@ -1,4 +1,4 @@
-import { IUser } from "../../dto/IUser";
+import { IUser } from "../../client/dto/IUser";
 import { User } from "./user";
 
 export class UserDto implements IUser {

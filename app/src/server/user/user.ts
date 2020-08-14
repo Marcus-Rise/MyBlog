@@ -21,19 +21,19 @@ export class User {
     );
     constructor(
         idOrDto: IUserStrApiDto | string = "",
-        firstname: string = "",
-        lastname: string = "",
-        username: string = "",
-        email: string = "",
-        isActive: boolean = false,
-        blocked: boolean = false,
+        firstname = "",
+        lastname = "",
+        username = "",
+        email = "",
+        isActive = false,
+        blocked = false,
         roles: string[] = [],
     ) {
         if (typeof idOrDto !== "string") {
             this.id = idOrDto.id;
             this.firstname = idOrDto.firstname;
             this.lastname = idOrDto.lastname;
-            this.username = idOrDto.username;
+            this.username = idOrDto.username ?? "";
             this.email = idOrDto.email;
             this.isActive = idOrDto.isActive;
             this.roles = idOrDto.roles;
@@ -55,7 +55,7 @@ export interface IUserStrApiDto {
     id: string;
     firstname: string;
     lastname: string;
-    username: string;
+    username: string | null;
     email: string;
     password: string;
     resetPasswordToken: string;

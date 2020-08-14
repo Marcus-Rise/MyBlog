@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./Header.module.scss";
-import { Avatar } from "./Avatar";
+import Link from "next/link";
+import { INDEX_PAGE_URL } from "../dto/IndexPageProps";
 
 export const Header: React.FC = () => {
     return (
@@ -8,14 +9,14 @@ export const Header: React.FC = () => {
             <div style={{ height: "100%" }} className="container-fluid">
                 <div style={{ height: "100%" }} className="row d-flex align-items-sm-center">
                     <div className="col-auto">
-                        <Avatar
-                            src={"https://marcus-rise.dev/profile-cropped/profile-cropped_ngn5s8_c_scale,w_275-min.png"}
-                            size={40}
-                            title={"MarcusRise"}
-                        />
-                        <h1 style={{ fontSize: "1.2em", margin: 0, display: "inline" }} className="ml-1">
-                            MarcusRise Blog
-                        </h1>
+                        <Link href={INDEX_PAGE_URL}>
+                            <h1
+                                style={{ fontSize: "1.2em", margin: 0, display: "inline" }}
+                                className={"ml-1 " + styles.hover}
+                            >
+                                MarcusRise Blog
+                            </h1>
+                        </Link>
                     </div>
                 </div>
             </div>

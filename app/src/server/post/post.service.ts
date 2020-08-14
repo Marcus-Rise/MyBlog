@@ -20,4 +20,24 @@ export class PostService {
 
         return posts;
     }
+
+    async getBySlug(slug: string): Promise<Post | null> {
+        let post: Post | null = null;
+
+        await this.http
+            .get<IPostStrApiDto[]>(`http://admin:1337/posts?=slug=${slug}`)
+            .toPromise()
+            .then((data) => {
+                const dto = data.data[0];
+
+                if (dto) {
+                    post = new Post(dto);
+                }
+            })
+            .catch((e) => {
+                this.logger.error(e.response.data, undefined, PostService.name);
+            });
+
+        return post;
+    }
 }
