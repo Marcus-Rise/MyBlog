@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "tsnd -r dotenv/config --ignore-watch src/client/components --ignore-watch src/client/.next --ignore-watch src/client/pages --inspect=0.0.0.0:9229 --project tsconfig.server.json src/server/main.ts",
     "lint": "eslint 'src/**/*.{js,ts,tsx}'",
-    "lint:fix": "lint --fix",
+    "lint:fix": "eslint 'src/**/*.{js,ts,tsx}' --fix",
     "test": "jest --collectCoverage=true",
     "test:watch": "jest --watch",
     "build:clean": "rimraf src/client/.next && rimraf dist",
