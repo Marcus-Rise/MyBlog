@@ -17,7 +17,7 @@ RUN npm ci
 COPY ./src ./src
 COPY ./*.js* ./
 
-#RUN npm run lint
+RUN npm run lint
 #RUN npm run test
 RUN npm run build && cp -r dist/client/.next client_backup
 RUN npm ci --only=prod
