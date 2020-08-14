@@ -16,8 +16,7 @@ before_script:
 
 build:
   stage: build
-  tags:
-    - build
+  image: docker
   script:
     - echo ${IMAGE_STAGED}
     - docker build --target prod -t ${IMAGE_STAGED}-db docker/postgres
@@ -35,8 +34,7 @@ rename:
     - tags
   dependencies:
     - build
-  tags:
-    - build
+  image: docker
   script:
     - docker image tag ${IMAGE_STAGED}-db ${IMAGE_RELEASE}-db
     - docker image tag ${IMAGE_STAGED}-admin ${IMAGE_RELEASE}-admin
