@@ -7,7 +7,7 @@ CMD npm install --quiet && npm run dev
 
 EXPOSE 3000
 
-FROM node:${NODE_VERSION}-alpine AS build
+FROM node:${NODE_VERSION}-stretch-slim AS build
 WORKDIR /app
 
 COPY package*.json ./
@@ -22,7 +22,7 @@ COPY ./*.js* ./
 RUN npm run build && cp -r dist/client/.next client_backup
 RUN npm ci --only=prod
 
-FROM node:${NODE_VERSION}-alpine as prod
+FROM node:${NODE_VERSION}-stretch-slim as prod
 WORKDIR /app
 
 COPY --from=build /app/package*.json ./
