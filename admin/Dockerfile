@@ -1,9 +1,8 @@
 FROM strapi/base AS base
 WORKDIR /app
 
-USER node
-
 FROM base AS dev
+USER node
 
 CMD npm install && npm run develop
 
