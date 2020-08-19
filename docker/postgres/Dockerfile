@@ -1,7 +1,9 @@
-FROM postgres AS dev
+FROM postgres:alpine AS base
+
+FROM base AS dev
 
 EXPOSE 5432
 
-FROM postgres AS prod
+FROM base AS prod
 
 EXPOSE 5432

@@ -1,15 +1,14 @@
 FROM strapi/base AS base
 WORKDIR /app
 
-USER node
-
 FROM base AS dev
+USER node
 
 CMD npm install && npm run develop
 
 EXPOSE 1337
 
-FROM strapi/base AS prod
+FROM base AS prod
 
 COPY ./package*.json ./
 RUN npm ci
