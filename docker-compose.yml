@@ -58,6 +58,7 @@ services:
       - ./docker/ingress/default.ssl.conf.erb:/var/lib/nginx-conf/default.ssl.conf.erb:ro
       - ./docker/ingress/502.html:/etc/nginx/html/502.html:ro
       - ./app/src/client/.next:/etc/nginx/html/_next:ro
+      - ./app/src/client/public:/etc/nginx/html/static:ro
     environment:
       STAGE: local
       DOMAINS: '${DOMAIN}'
