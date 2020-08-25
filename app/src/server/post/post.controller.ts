@@ -9,7 +9,7 @@ export class PostController {
     constructor(private readonly postService: PostService) {}
 
     @Get(INDEX_PAGE_URL)
-    @Render("Index")
+    @Render("index")
     async index(): Promise<IndexPageProps> {
         const posts = await this.postService.get();
 
@@ -17,7 +17,7 @@ export class PostController {
     }
 
     @Get(POST_PAGE_URL + "/:slug")
-    @Render("Post")
+    @Render("post")
     async getBySlug(@Param("slug") slug: string): Promise<PostPageProps> {
         const post = await this.postService.getBySlug(slug);
 
