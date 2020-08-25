@@ -8,36 +8,23 @@ class MyDocument extends Document {
     }
 
     render() {
-        const keywords = ["Ilya", "Konstantinov", "Web", "Developer", "Samara"].join(", ");
-
         return (
             <Html>
                 <Head>
-                    <meta charSet="utf-8" />
-                    <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-                    <meta
-                        name="viewport"
-                        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
-                    />
-                    <meta name="title" content="MarcusBlog" />
-                    <meta name="description" content="Ilya Konstantinov web developer blog" />
-                    <meta name="keywords" content={keywords} />
-                    <title>MarcusBlog</title>
-
                     <link rel="manifest" href="/manifest.json" />
                     <link
-                        href="/icon/favicon-16x16-dunplab-manifest-10525.png"
+                        href="/icons/favicon-16x16-dunplab-manifest-10525.png"
                         rel="icon"
                         type="image/png"
                         sizes="16x16"
                     />
                     <link
-                        href="/icon/favicon-32x32-dunplab-manifest-10525.png"
+                        href="/icons/favicon-32x32-dunplab-manifest-10525.png"
                         rel="icon"
                         type="image/png"
                         sizes="32x32"
                     />
-                    <link rel="apple-touch-icon" href="/icon/apple-icon-57x57-dunplab-manifest-10525.png"></link>
+                    <link rel="apple-touch-icon" href="/icons/apple-icon-57x57-dunplab-manifest-10525.png" />
                     <meta name="theme-color" content="#445768" />
                 </Head>
                 <body>
