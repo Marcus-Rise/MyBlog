@@ -76,7 +76,7 @@ server {
     }
     <% else %>
     location / {
-        try_files $uri @backend;
+        try_files /static$uri /_next$uri $uri @backend;
     }
 
     error_page 502 /502.html;
