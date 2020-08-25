@@ -61,5 +61,5 @@ services:
       - ./app/src/client/public:/etc/nginx/html/static:ro
     environment:
       STAGE: local
-      DOMAINS: '${DOMAIN}'
+      DOMAINS: ${DOMAIN}
       ACCESS_LOG: 'true'

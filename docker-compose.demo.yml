@@ -55,7 +55,7 @@ services:
       - static:/etc/nginx/html/_next:ro
     environment:
       STAGE: local
-      DOMAINS: '${DOMAIN}'
+      DOMAINS: ${DOMAIN}
       ACCESS_LOG: 'true'
 
 volumes:
