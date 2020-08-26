@@ -36,7 +36,7 @@ export class Post {
             this.title = idOrDto.data.title[0].text;
             this.slug = idOrDto.uid ?? idOrDto.slugs[0];
             this.tags = idOrDto.tags;
-            this.description = "";
+            this.description = idOrDto.data.description;
             this.content = idOrDto.data.body.flatMap((i) => i.primary).flatMap((i) => i.text);
             this.id = idOrDto.id;
             this.createdAt = idOrDto.first_publication_date ? new Date(idOrDto.first_publication_date) : null;
@@ -71,6 +71,7 @@ export interface IPostApiDto extends Document {
                 spans: [];
             },
         ];
+        description: string;
         body: Slice[];
     };
 }

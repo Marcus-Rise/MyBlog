@@ -6,6 +6,7 @@ import { POST_PAGE_URL } from "../dto/PostPageProps";
 interface IProps {
     title: string;
     slug: string;
+    description: string;
     createdAt: string;
 }
 
@@ -19,6 +20,7 @@ export const PostCard: React.FC<IProps> = (props) => {
                 <h6 className="card-subtitle mb-2 text-muted">
                     <DateDisplay date={props.createdAt} />
                 </h6>
+                <div>{props.description}</div>
             </div>
         </div>
     );

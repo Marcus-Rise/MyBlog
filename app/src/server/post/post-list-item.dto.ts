@@ -5,6 +5,7 @@ export class PostListItemDto implements IPostListItem {
     id: string;
     title: string;
     slug: string;
+    description: string;
     createdAt: string;
     updatedAt: string;
 
@@ -12,6 +13,7 @@ export class PostListItemDto implements IPostListItem {
         this.id = post.id;
         this.title = post.title;
         this.slug = post.slug;
+        this.description = post.description;
         this.createdAt = post.createdAt?.toISOString() ?? "";
         this.updatedAt = post.updatedAt?.toISOString() ?? "";
     }
