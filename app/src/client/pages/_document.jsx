@@ -9,7 +9,7 @@ class MyDocument extends Document {
 
     render() {
         return (
-            <Html>
+            <Html lang={"ru"}>
                 <Head crossOrigin="anonymous">
                     <link rel="manifest" href="/manifest.json" />
                     <link
