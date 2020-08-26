@@ -16,7 +16,6 @@ export class PostService {
         await this.api
             .query("")
             .then((data) => {
-                this.logger.debug(data, PostService.name);
                 posts = data.results.map((i) => new Post(i));
             })
             .catch((e) => {
