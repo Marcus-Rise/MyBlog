@@ -10,8 +10,8 @@ services:
     ports:
       - '3000:3000'
       - '9229:9229'
-    env_file:
-      - .env
+    environment:
+      API_END_POINT: ${API_END_POINT}
 
   ingress:
     build:
