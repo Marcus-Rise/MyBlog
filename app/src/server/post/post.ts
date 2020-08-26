@@ -1,4 +1,5 @@
 import { Document } from "prismic-javascript/types/documents";
+import { RichTextBlock } from "prismic-reactjs";
 
 export class Post {
     id: string;
@@ -6,7 +7,7 @@ export class Post {
     slug: string;
     tags: string[];
     description: string;
-    text: string;
+    content: RichTextBlock[];
     createdAt: Date | null;
     updatedAt: Date | null;
 
@@ -17,7 +18,7 @@ export class Post {
         slug?: string,
         tags?: string[],
         description?: string,
-        text?: string,
+        content?: RichTextBlock[],
         createdAt?: Date | null,
         updatedAt?: Date | null,
     );
@@ -27,7 +28,7 @@ export class Post {
         slug = "",
         tags: string[] = [],
         description = "",
-        text = "",
+        content: RichTextBlock[] = [],
         createdAt: Date | null = null,
         updatedAt: Date | null = null,
     ) {
@@ -36,7 +37,7 @@ export class Post {
             this.slug = idOrDto.uid ?? idOrDto.slugs[0];
             this.tags = idOrDto.tags;
             this.description = "";
-            this.text = "";
+            this.content = idOrDto.data.body.flatMap((i) => i.primary).flatMap((i) => i.text);
             this.id = idOrDto.id;
             this.createdAt = idOrDto.first_publication_date ? new Date(idOrDto.first_publication_date) : null;
             this.updatedAt = idOrDto.last_publication_date ? new Date(idOrDto.last_publication_date) : null;
@@ -46,11 +47,19 @@ export class Post {
             this.slug = slug;
             this.tags = tags;
             this.description = description;
-            this.text = text;
+            this.content = content;
             this.createdAt = createdAt;
             this.updatedAt = updatedAt;
         }
     }
+}
+
+interface Slice {
+    slice_type: "text";
+    slice_label: null;
+    primary: {
+        text: RichTextBlock[];
+    };
 }
 
 export interface IPostApiDto extends Document {
@@ -62,22 +71,6 @@ export interface IPostApiDto extends Document {
                 spans: [];
             },
         ];
-        content: [
-            {
-                type: "preformatted";
-                text: string;
-                spans: [];
-            },
-            {
-                type: "image";
-                url: string;
-                alt: string;
-                copyright: null;
-                dimensions: {
-                    width: number;
-                    height: number;
-                };
-            },
-        ];
+        body: Slice[];
     };
 }
