@@ -10,7 +10,7 @@ class MyDocument extends Document {
     render() {
         return (
             <Html>
-                <Head>
+                <Head crossOrigin="anonymous">
                     <link rel="manifest" href="/manifest.json" />
                     <link
                         href="/icon/favicon-16x16-dunplab-manifest-10525.png"
@@ -29,7 +29,7 @@ class MyDocument extends Document {
                 </Head>
                 <body>
                     <Main />
-                    <NextScript />
+                    <NextScript crossOrigin="anonymous" />
                 </body>
             </Html>
         );
