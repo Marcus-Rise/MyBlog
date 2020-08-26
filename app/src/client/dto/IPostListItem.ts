@@ -1,11 +1,8 @@
-import { RichTextBlock } from "prismic-reactjs";
-
-export interface IPost {
+export interface IPostListItem {
     id: string;
     title: string;
     slug: string;
     description: string;
-    content: RichTextBlock[];
     updatedAt: string;
     createdAt: string;
 }

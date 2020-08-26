@@ -34,7 +34,21 @@ export const bootstrap = async (server: NestExpressApplication): Promise<void> =
                     skip: (req, res) => res.statusCode < 400,
                 }),
             );
-            server.use(helmet());
+            server.use(
+                helmet({
+                    contentSecurityPolicy: {
+                        directives: {
+                            defaultSrc: [
+                                "'self'",
+                                ...(process.env.ALLOWED_CONTENT_ORIGIN || "").split(","),
+                                "'unsafe-inline'",
+                            ],
+                            objectSrc: ["'none'"],
+                            upgradeInsecureRequests: [],
+                        },
+                    },
+                }),
+            );
             server.use(cors());
             break;
     }

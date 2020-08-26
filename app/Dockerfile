@@ -21,7 +21,10 @@ COPY ./*.js* ./
 
 RUN npm run lint
 #RUN npm run test
-RUN npm run build && cp -r dist/client/.next client_backup
+RUN npm run build \
+    && cp -r src/client/public/* dist/client/.next \
+    && cp -r dist/client/.next client_backup
+
 RUN npm ci --only=prod
 
 FROM node:${NODE_VERSION}-stretch-slim as prod

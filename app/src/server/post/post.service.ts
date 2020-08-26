@@ -1,21 +1,25 @@
-import { HttpService, Injectable, Logger } from "@nestjs/common";
-import { IPostStrApiDto, Post } from "./post";
+import { Inject, Injectable, Logger } from "@nestjs/common";
+import { Post } from "./post";
+import { API_PROVIDER, IApi } from "../prismic/prismic.types";
 
 @Injectable()
 export class PostService {
-    constructor(private readonly http: HttpService, private readonly logger: Logger) {}
+    constructor(
+        @Inject(API_PROVIDER)
+        private readonly api: IApi,
+        private readonly logger: Logger,
+    ) {}
 
     async get(): Promise<Post[]> {
         let posts: Post[] = [];
 
-        await this.http
-            .get<IPostStrApiDto[]>("http://admin:1337/posts")
-            .toPromise()
+        await this.api
+            .query("")
             .then((data) => {
-                posts = data.data.map((i) => new Post(i));
+                posts = data.results.map((i) => new Post(i));
             })
             .catch((e) => {
-                this.logger.error(e.response.data, undefined, PostService.name);
+                this.logger.error(e, e, PostService.name);
             });
 
         return posts;
@@ -24,18 +28,13 @@ export class PostService {
     async getBySlug(slug: string): Promise<Post | null> {
         let post: Post | null = null;
 
-        await this.http
-            .get<IPostStrApiDto[]>(`http://admin:1337/posts?=slug=${slug}`)
-            .toPromise()
+        await this.api
+            .getByUID("post", slug, {})
             .then((data) => {
-                const dto = data.data[0];
-
-                if (dto) {
-                    post = new Post(dto);
-                }
+                post = new Post(data);
             })
             .catch((e) => {
-                this.logger.error(e.response.data, undefined, PostService.name);
+                this.logger.error(e, e, PostService.name);
             });
 
         return post;

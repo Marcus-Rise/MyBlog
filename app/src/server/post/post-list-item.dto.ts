@@ -1,13 +1,11 @@
 import { Post } from "./post";
-import { IPost } from "../../client/dto/IPost";
-import { RichTextBlock } from "prismic-reactjs";
+import { IPostListItem } from "../../client/dto/IPostListItem";
 
-export class PostDto implements IPost {
+export class PostListItemDto implements IPostListItem {
     id: string;
     title: string;
     slug: string;
     description: string;
-    content: RichTextBlock[];
     createdAt: string;
     updatedAt: string;
 
@@ -16,7 +14,6 @@ export class PostDto implements IPost {
         this.title = post.title;
         this.slug = post.slug;
         this.description = post.description;
-        this.content = post.content;
         this.createdAt = post.createdAt?.toISOString() ?? "";
         this.updatedAt = post.updatedAt?.toISOString() ?? "";
     }
