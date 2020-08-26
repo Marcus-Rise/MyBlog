@@ -6,6 +6,7 @@ import { RichText } from "prismic-reactjs";
 import { htmlSerializer } from "../components/htmlSerializer";
 import { NextSeo } from "next-seo";
 import headerStyles from "./PostHeader.module.scss";
+import { PostTagList } from "../components/PostTagList";
 
 const Post: NextPage<PostPageProps> = ({ post }) => {
     return (
@@ -20,6 +21,9 @@ const Post: NextPage<PostPageProps> = ({ post }) => {
                                 <p className="card-subtitle mb-2 text-muted">
                                     <DateDisplay date={post.createdAt} />
                                 </p>
+                                <div>
+                                    <PostTagList tags={post.tags} />
+                                </div>
                             </div>
                             <hr />
                             <div>

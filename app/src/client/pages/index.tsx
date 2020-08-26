@@ -15,6 +15,7 @@ const Index: NextPage<IndexPageProps> = (props) => {
                             <PostCard
                                 title={i.title}
                                 slug={i.slug}
+                                tags={i.tags}
                                 createdAt={i.createdAt}
                                 description={i.description}
                             />

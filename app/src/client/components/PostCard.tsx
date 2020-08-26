@@ -3,10 +3,12 @@ import { DateDisplay } from "./DateDisplay";
 import styles from "./PostCard.module.scss";
 import headerStyles from "../pages/PostHeader.module.scss";
 import { POST_PAGE_URL } from "../dto/PostPageProps";
+import { PostTagList } from "./PostTagList";
 
 interface IProps {
     title: string;
     slug: string;
+    tags: string[];
     description: string;
     createdAt: string;
 }
@@ -22,6 +24,9 @@ export const PostCard: React.FC<IProps> = (props) => {
                     <DateDisplay date={props.createdAt} />
                 </p>
                 <div>{props.description}</div>
+                <div>
+                    <PostTagList tags={props.tags} />
+                </div>
             </div>
         </div>
     );
