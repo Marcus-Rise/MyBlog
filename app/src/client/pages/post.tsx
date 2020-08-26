@@ -2,7 +2,6 @@ import React from "react";
 import { NextPage, NextPageContext } from "next";
 import { PostPageProps } from "../dto/PostPageProps";
 import { DateDisplay } from "../components/DateDisplay";
-import ReactMarkdown from "react-markdown";
 
 const Post: NextPage<PostPageProps> = ({ post }) => {
     return (
@@ -13,13 +12,11 @@ const Post: NextPage<PostPageProps> = ({ post }) => {
                         <div className="card-body">
                             <h5 className="card-title">{post.title}</h5>
                             <h6 className="card-subtitle mb-2 text-muted">
-                                <DateDisplay date={post.createdAt} /> by {post.createdBy.username}
+                                <DateDisplay date={post.createdAt} />
                             </h6>
                         </div>
                         <div className="card-body">
-                            <div className="card-text">
-                                <ReactMarkdown source={post.text} />
-                            </div>
+                            <div className="card-text">{/*<ReactMarkdown source={post.text} />*/}</div>
                         </div>
                     </div>
                 </div>

@@ -1,7 +1,7 @@
 import { Post } from "./post";
-import { IPost } from "../../client/dto/IPost";
+import { IPostListItem } from "../../client/dto/IPostListItem";
 
-export class PostDto implements IPost {
+export class PostListItemDto implements IPostListItem {
     id: string;
     title: string;
     slug: string;

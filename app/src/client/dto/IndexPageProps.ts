@@ -1,7 +1,7 @@
-import { IPost } from "./IPost";
+import { IPostListItem } from "./IPostListItem";
 
 export const INDEX_PAGE_URL = "/";
 
 export interface IndexPageProps {
-    posts: IPost[];
+    posts: IPostListItem[];
 }

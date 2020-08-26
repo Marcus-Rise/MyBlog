@@ -1,4 +1,4 @@
-export interface IPost {
+export interface IPostListItem {
     id: string;
     title: string;
     slug: string;
