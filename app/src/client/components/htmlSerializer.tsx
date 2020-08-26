@@ -1,5 +1,6 @@
 import React from "react";
 import { Elements } from "prismic-reactjs";
+import Gist from "react-gist";
 
 const linkResolver = (doc) => {
     // Pretty URLs for known types
@@ -84,10 +85,16 @@ export const htmlSerializer = (type, element, content, children, key) => {
                 },
                 element.label ? { className: element.label } : {},
             );
-            const embedHtml = React.createElement("div", {
-                dangerouslySetInnerHTML: { __html: element.oembed.html },
-            });
-            return React.createElement("div", propsWithUniqueKey(props, key), embedHtml);
+
+            if (element.oembed.provider_name === "GitHub") {
+                return React.createElement("div", propsWithUniqueKey(props, key), <Gist id={element.oembed.gist} />);
+            } else {
+                const embedHtml = React.createElement("div", {
+                    dangerouslySetInnerHTML: { __html: element.oembed.html },
+                });
+
+                return React.createElement("div", propsWithUniqueKey(props, key), embedHtml);
+            }
 
         case Elements.hyperlink: // Image
             const targetAttr = element.data.target ? { target: element.data.target } : {};
