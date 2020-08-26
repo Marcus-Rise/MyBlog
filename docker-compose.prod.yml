@@ -7,6 +7,7 @@ services:
       - static:/app/dist/client/.next
     environment:
       API_END_POINT: ${API_END_POINT}
+      ALLOWED_CONTENT_ORIGIN: ${ALLOWED_CONTENT_ORIGIN}
 
   ingress:
     image: ${CONTAINER_REGISTRY}-ingress
