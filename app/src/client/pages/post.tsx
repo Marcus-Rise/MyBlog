@@ -5,6 +5,7 @@ import { DateDisplay } from "../components/DateDisplay";
 import { RichText } from "prismic-reactjs";
 import { htmlSerializer } from "../components/htmlSerializer";
 import { NextSeo } from "next-seo";
+import headerStyles from "./PostHeader.module.scss";
 
 const Post: NextPage<PostPageProps> = ({ post }) => {
     return (
@@ -15,10 +16,10 @@ const Post: NextPage<PostPageProps> = ({ post }) => {
                     <div className="col-12">
                         <div className="card border-0">
                             <div>
-                                <h5 className="card-title">{post.title}</h5>
-                                <h6 className="card-subtitle mb-2 text-muted">
+                                <h2 className={`card-title ${headerStyles.h2}`}>{post.title}</h2>
+                                <p className="card-subtitle mb-2 text-muted">
                                     <DateDisplay date={post.createdAt} />
-                                </h6>
+                                </p>
                             </div>
                             <hr />
                             <div>

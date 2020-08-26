@@ -1,6 +1,7 @@
 import React from "react";
 import { DateDisplay } from "./DateDisplay";
 import styles from "./PostCard.module.scss";
+import headerStyles from "../pages/PostHeader.module.scss";
 import { POST_PAGE_URL } from "../dto/PostPageProps";
 
 interface IProps {
@@ -15,11 +16,11 @@ export const PostCard: React.FC<IProps> = (props) => {
         <div className="card">
             <div className="card-body">
                 <a href={`${POST_PAGE_URL}/${props.slug}`} style={{ textDecoration: "none", color: "inherit" }}>
-                    <h5 className={"card-title " + styles.hover}>{props.title}</h5>
+                    <h2 className={`card-title ${styles.hover} ${headerStyles.h2}`}>{props.title}</h2>
                 </a>
-                <h6 className="card-subtitle mb-2 text-muted">
+                <p className="card-subtitle mb-2 text-muted">
                     <DateDisplay date={props.createdAt} />
-                </h6>
+                </p>
                 <div>{props.description}</div>
             </div>
         </div>
