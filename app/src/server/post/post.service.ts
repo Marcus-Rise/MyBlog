@@ -31,7 +31,9 @@ export class PostService {
         await this.api
             .getByUID("post", slug, {})
             .then((data) => {
-                post = new Post(data);
+                if (data) {
+                    post = new Post(data);
+                }
             })
             .catch((e) => {
                 this.logger.error(e, e, PostService.name);
