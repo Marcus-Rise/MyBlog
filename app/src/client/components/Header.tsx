@@ -6,7 +6,7 @@ import Container from "react-bootstrap/Container";
 export const Header: React.FC = () => {
     return (
         <header className={"py-3 " + styles.header}>
-            <Container>
+            <Container fluid>
                 <a className={styles.link} href={INDEX_PAGE_URL}>
                     <h1 className={styles.title}>MarcusRise Blog</h1>
                 </a>
