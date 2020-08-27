@@ -9,7 +9,7 @@ class MyDocument extends Document {
 
     render() {
         return (
-            <Html lang={"ru"}>
+            <Html lang={"ru"} className="h-100">
                 <Head>
                     <link rel="manifest" href="/manifest.json" />
                     <link
@@ -27,7 +27,7 @@ class MyDocument extends Document {
                     <link rel="apple-touch-icon" href="/icon/apple-icon-57x57-dunplab-manifest-10525.png" />
                     <meta name="theme-color" content="#445768" />
                 </Head>
-                <body>
+                <body className="h-100">
                     <Main />
                     <NextScript />
                 </body>
