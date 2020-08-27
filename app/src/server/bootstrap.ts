@@ -4,20 +4,8 @@ import morgan from "morgan";
 import helmet from "helmet";
 import cors from "cors";
 import csurf from "csurf";
-import Next from "next";
-import { RenderModule } from "nest-next";
-import { resolve } from "path";
 
 export const bootstrap = async (server: NestExpressApplication): Promise<void> => {
-    const dev = process.env.NODE_ENV === "development";
-    const app = Next({
-        dev,
-        dir: dev ? resolve(__dirname, "../client") : resolve(__dirname, "../../dist/client"),
-    });
-    await app.prepare();
-    const renderer = server.get(RenderModule);
-    renderer.register(server, app, { viewsDir: "", dev });
-
     server.use(cookieParser(process.env.COOKIE_SECRET || "COOKIE_SECRET"));
     server.use(csurf({ cookie: true }));
 
