@@ -7,7 +7,7 @@ import Row from "react-bootstrap/Row";
 
 export const Header: React.FC = () => {
     return (
-        <header className={styles.header}>
+        <header className={"py-3 " + styles.header}>
             <Container style={{ height: "100%" }} fluid>
                 <Row style={{ height: "100%" }} className="d-flex align-items-sm-center">
                     <Col>
