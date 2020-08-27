@@ -3,9 +3,10 @@ import { format } from "date-fns";
 
 interface IProps {
     date: string | Date;
+    className: string;
 }
 
-export const DateDisplay: React.FC<IProps> = ({ date }) => {
+export const DateDisplay: React.FC<IProps> = ({ date, className }) => {
     let str: string;
     const formatTempl = "dd.MM.yyyy";
 
@@ -15,5 +16,5 @@ export const DateDisplay: React.FC<IProps> = ({ date }) => {
         str = format(date, formatTempl);
     }
 
-    return <span>{str}</span>;
+    return <span className={className}>{str}</span>;
 };

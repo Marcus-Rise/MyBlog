@@ -1,12 +1,10 @@
 import React from "react";
 import { NextPage, NextPageContext } from "next";
 import { PostPageProps } from "../dto/PostPageProps";
-import { DateDisplay } from "../components/DateDisplay";
 import { RichText } from "prismic-reactjs";
 import { htmlSerializer } from "../components/htmlSerializer";
 import { NextSeo } from "next-seo";
-import headerStyles from "./PostHeader.module.scss";
-import { PostTagList } from "../components/PostTagList";
+import { PostHeader } from "../components/PostHeader";
 
 const Post: NextPage<PostPageProps> = ({ post }) => {
     return (
@@ -16,16 +14,7 @@ const Post: NextPage<PostPageProps> = ({ post }) => {
                 <div className="row">
                     <div className="col-12">
                         <div className="card border-0">
-                            <div>
-                                <h2 className={`card-title ${headerStyles.h2}`}>{post.title}</h2>
-                                <p className="card-subtitle mb-2 text-muted">
-                                    <DateDisplay date={post.createdAt} />
-                                </p>
-                                <div>
-                                    <PostTagList tags={post.tags} />
-                                </div>
-                            </div>
-                            <hr />
+                            <PostHeader tags={post.tags} title={post.title} createdAt={post.createdAt} />
                             <div>
                                 <RichText render={post.content} htmlSerializer={htmlSerializer} />
                             </div>
