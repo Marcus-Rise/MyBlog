@@ -87,7 +87,11 @@ export const htmlSerializer = (type, element, content, children, key) => {
             );
 
             if (element.oembed.provider_name === "GitHub") {
-                return React.createElement("div", propsWithUniqueKey(props, key), <Gist id={element.oembed.gist} />);
+                return React.createElement(
+                    "div",
+                    propsWithUniqueKey(props, key),
+                    <Gist id={element.oembed.gist} file={element.oembed.title} />,
+                );
             } else {
                 const embedHtml = React.createElement("div", {
                     dangerouslySetInnerHTML: { __html: element.oembed.html },
