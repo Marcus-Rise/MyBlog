@@ -2,9 +2,16 @@
     font-size: 1.65rem;
 }
 
-.hover {
+.link {
+  text-decoration: none !important;
+  color: inherit;
+
   &:hover {
     cursor: pointer;
     color: var(--info);
   }
+}
+
+.meta {
+  font-size: 0.9rem;
 }

@@ -12,17 +12,17 @@ interface IProps {
 }
 
 export const PostHeader: React.FC<IProps> = (props) => {
-    const h2 = <h2 className={`card-title ${styles.hover} ${styles.h2}`}>{props.title}</h2>;
+    const h2 = <h2 className={`card-title ${styles.h2}`}>{props.title}</h2>;
 
     return (
         <React.Fragment>
             {props.link && (
-                <a href={props.link} style={{ textDecoration: "none", color: "inherit" }}>
+                <a href={props.link} className={styles.link}>
                     {h2}
                 </a>
             )}
             {!props.link && h2}
-            <div className="card-subtitle mb-2 text-muted d-flex align-items-center" style={{ fontSize: "0.9rem" }}>
+            <div className={`card-subtitle mb-2 text-muted d-flex align-items-center ${styles.meta}`}>
                 <FaRegClock className="mr-1" />
                 <DateDisplay className="mr-1" date={props.createdAt} />
                 <PostTagList tags={props.tags} />
