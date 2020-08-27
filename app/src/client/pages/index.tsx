@@ -3,15 +3,18 @@ import React from "react";
 import { NextPage, NextPageContext } from "next";
 import { PostCard } from "../components/PostCard";
 import { NextSeo } from "next-seo";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
 
 const Index: NextPage<IndexPageProps> = (props) => {
     return (
         <React.Fragment>
             <NextSeo title={"MarcusBlog"} description={"Ilya Konstantinov web developer"} />
-            <div className="container pt-5">
-                <div className="row">
+            <Container className="pt-3">
+                <Row>
                     {props.posts.map((i) => (
-                        <div className="col-12" key={i.id}>
+                        <Col xs={12} key={i.id}>
                             <PostCard
                                 title={i.title}
                                 slug={i.slug}
@@ -19,10 +22,10 @@ const Index: NextPage<IndexPageProps> = (props) => {
                                 createdAt={i.createdAt}
                                 description={i.description}
                             />
-                        </div>
+                        </Col>
                     ))}
-                </div>
-            </div>
+                </Row>
+            </Container>
         </React.Fragment>
     );
 };

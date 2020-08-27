@@ -5,23 +5,20 @@ import { RichText } from "prismic-reactjs";
 import { htmlSerializer } from "../components/htmlSerializer";
 import { NextSeo } from "next-seo";
 import { PostHeader } from "../components/PostHeader";
+import Card from "react-bootstrap/Card";
 
 const Post: NextPage<PostPageProps> = ({ post }) => {
     return (
         <React.Fragment>
             <NextSeo title={`MarcusBlog | ${post.title}`} description={post.description} />
-            <div className="container pt-5">
-                <div className="row">
-                    <div className="col-12">
-                        <div className="card border-0">
-                            <PostHeader tags={post.tags} title={post.title} createdAt={post.createdAt} />
-                            <div>
-                                <RichText render={post.content} htmlSerializer={htmlSerializer} />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <Card className="pt-3 border-0">
+                <Card.Body>
+                    <PostHeader tags={post.tags} title={post.title} createdAt={post.createdAt} />
+                    <Card.Text>
+                        <RichText render={post.content} htmlSerializer={htmlSerializer} />
+                    </Card.Text>
+                </Card.Body>
+            </Card>
         </React.Fragment>
     );
 };

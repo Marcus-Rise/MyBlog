@@ -2,7 +2,8 @@ import React from "react";
 import styles from "./PostHeader.module.scss";
 import { DateDisplay } from "./DateDisplay";
 import { PostTagList } from "./PostTagList";
-import { FaRegClock } from "react-icons/fa";
+import { FaRegClock } from "react-icons/fa/";
+import Card from "react-bootstrap/Card";
 
 interface IProps {
     link?: string;
@@ -12,7 +13,11 @@ interface IProps {
 }
 
 export const PostHeader: React.FC<IProps> = (props) => {
-    const h2 = <h2 className={`card-title ${styles.h2}`}>{props.title}</h2>;
+    const h2 = (
+        <Card.Title as={"h2"} className={styles.h2}>
+            {props.title}
+        </Card.Title>
+    );
 
     return (
         <React.Fragment>
@@ -22,11 +27,11 @@ export const PostHeader: React.FC<IProps> = (props) => {
                 </a>
             )}
             {!props.link && h2}
-            <div className={`card-subtitle mb-2 text-muted d-flex align-items-center ${styles.meta}`}>
+            <Card.Subtitle className={`mb-2 text-muted d-flex align-items-center ${styles.meta}`}>
                 <FaRegClock className="mr-1" />
                 <DateDisplay className="mr-1" date={props.createdAt} />
                 <PostTagList tags={props.tags} />
-            </div>
+            </Card.Subtitle>
         </React.Fragment>
     );
 };
