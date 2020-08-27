@@ -9,9 +9,9 @@ const Index: NextPage<IndexPageProps> = (props) => {
         <React.Fragment>
             <NextSeo title={"MarcusBlog"} description={"Ilya Konstantinov web developer"} />
             <div className="container pt-5">
-                {props.posts.map((i) => (
-                    <div className="row mb-3" key={i.id}>
-                        <div className="col-12">
+                <div className="row">
+                    {props.posts.map((i) => (
+                        <div className="col-12" key={i.id}>
                             <PostCard
                                 title={i.title}
                                 slug={i.slug}
@@ -20,8 +20,8 @@ const Index: NextPage<IndexPageProps> = (props) => {
                                 description={i.description}
                             />
                         </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         </React.Fragment>
     );
