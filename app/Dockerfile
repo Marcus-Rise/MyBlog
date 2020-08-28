@@ -30,6 +30,8 @@ RUN npm prune --production && npm cache clear --force
 FROM node:${NODE_VERSION}-stretch-slim as prod
 WORKDIR /app
 
+ENV NODE_ENV=production
+
 COPY --from=build /app/package*.json ./
 COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
@@ -37,6 +39,6 @@ COPY --from=build /app/client_backup ./client_backup
 
 CMD rm -rf dist/client/.next/* \
     && cp -r client_backup/* dist/client/.next \
-    && npm run start
+    && node dist/server/main.js
 
 EXPOSE 3000

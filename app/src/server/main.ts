@@ -11,6 +11,6 @@ import { bootstrap } from "./bootstrap";
     await bootstrap(app);
 
     await app.listen(PORT, async () => {
-        console.log(`> Ready on http://localhost:${PORT}`);
+        console.log(`> Ready on http://localhost:${PORT} in ${process.env.NODE_ENV}`);
     });
 })();
