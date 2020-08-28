@@ -25,7 +25,7 @@ RUN npm run build \
     && cp -r src/client/public/* dist/client/.next \
     && cp -r dist/client/.next client_backup
 
-RUN npm ci --only=prod
+RUN npm prune --production && npm cache clear --force
 
 FROM node:${NODE_VERSION}-stretch-slim as prod
 WORKDIR /app
