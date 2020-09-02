@@ -9,4 +9,12 @@ module.exports = withPWA({
     reactStrictMode: true,
     distDir: process.env.NODE_ENV === "production" ? "../../dist/client/.next" : undefined,
     crossOrigin: "anonymous",
+    webpack(config) {
+        config.module.rules.push({
+            test: /\.svg$/,
+            use: ["@svgr/webpack", "url-loader"],
+        });
+
+        return config;
+    },
 });
