@@ -32,6 +32,7 @@ export const bootstrap = async (server: NestExpressApplication): Promise<void> =
                                 "'unsafe-inline'",
                             ],
                             objectSrc: ["'none'"],
+                            imgSrc: ["'self'", "data:", ...(process.env.ALLOWED_CONTENT_ORIGIN || "").split(",")],
                             upgradeInsecureRequests: [],
                         },
                     },
