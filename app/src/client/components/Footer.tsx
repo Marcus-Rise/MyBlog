@@ -20,7 +20,13 @@ export const Footer: React.FC = () => {
                     rel={"noreferrer"}
                     className={"ml-2"}
                 >
-                    <img width={gitlabLogoSize} height={gitlabLogoSize} src={GitlabLogo} alt={"gitlab"} />
+                    <img
+                        width={gitlabLogoSize}
+                        height={gitlabLogoSize}
+                        src={GitlabLogo}
+                        alt={"gitlab"}
+                        className={styles.gitlab_logo}
+                    />
                 </a>
             </Container>
         </footer>
