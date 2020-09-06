@@ -23,6 +23,8 @@ services:
       - 8080:80
     volumes:
       - ./docker/nginx/dev.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./docker/nginx/favicon.png:/etc/nginx/html/favicon.png:ro
+      - ./docker/nginx/bootstrap.min.css:/etc/nginx/html/bootstrap.min.css:ro
       - ./docker/nginx/502.html:/etc/nginx/html/502.html:ro
       - ./app/src/client/.next:/etc/nginx/html/_next:ro
       - ./app/src/client/public:/etc/nginx/html/static:ro
