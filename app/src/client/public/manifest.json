@@ -11,9 +11,15 @@
   "orientation": "portrait",
   "icons": [
     {
+      "src": "/icon/android-icon-512x512-dunplab-manifest-10525.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
       "src": "/icon/android-icon-192x192-dunplab-manifest-10525.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "192x192",
+      "purpose": "any maskable"
     },
     {
       "src": "/icon/apple-icon-180x180-dunplab-manifest-10525.png",
