@@ -1,6 +1,7 @@
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { Post } from "./post";
 import { API_PROVIDER, IApi } from "../prismic/prismic.types";
+import Prismic from "prismic-javascript";
 
 @Injectable()
 export class PostService {
@@ -14,7 +15,9 @@ export class PostService {
         let posts: Post[] = [];
 
         await this.api
-            .query("")
+            .query(Prismic.Predicates.at("document.type", "post"), {
+                orderings: "[document.first_publication_date desc]",
+            })
             .then((data) => {
                 posts = data.results.map((i) => new Post(i));
             })
