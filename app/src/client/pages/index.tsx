@@ -1,5 +1,5 @@
 import { IndexPageProps } from "../dto/IndexPageProps";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NextPage, NextPageContext } from "next";
 import { PostCard } from "../components/PostCard";
 import { NextSeo } from "next-seo";
@@ -9,6 +9,27 @@ import Row from "react-bootstrap/Row";
 
 const Index: NextPage<IndexPageProps> = (props) => {
     const [nextPage, setNextPage] = useState<number | null>(props.nextPage);
+
+    const getScrollTop = (): number => window.pageYOffset ?? document.body.scrollTop;
+
+    const getDocumentHeight = (): number => {
+        const body = document.body;
+        const html = document.documentElement;
+
+        return Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+    };
+
+    useEffect(() => {
+        window.onscroll = () => {
+            if (getScrollTop() >= getDocumentHeight() - window.innerHeight) {
+                console.debug("next", nextPage);
+            }
+        };
+
+        return () => {
+            window.onscroll = undefined;
+        };
+    });
 
     return (
         <React.Fragment>
