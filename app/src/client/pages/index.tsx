@@ -6,9 +6,12 @@ import { NextSeo } from "next-seo";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
+import { IPostListItem } from "../dto/IPostListItem";
+import { GET_POST_LIST_URL, IGetPostListDto } from "../dto/GetPostList";
 
 const Index: NextPage<IndexPageProps> = (props) => {
     const [nextPage, setNextPage] = useState<number | null>(props.nextPage);
+    const [posts, setPosts] = useState<IPostListItem[]>(props.posts);
 
     const getScrollTop = (): number => window.pageYOffset ?? document.body.scrollTop;
 
@@ -19,10 +22,22 @@ const Index: NextPage<IndexPageProps> = (props) => {
         return Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
     };
 
+    const loadMorePosts = async (page: number): Promise<IGetPostListDto> => {
+        const res = await fetch(`${GET_POST_LIST_URL}?page=${page}`);
+        return await res.json();
+    };
+
     useEffect(() => {
-        window.onscroll = () => {
+        window.onscroll = async () => {
             if (getScrollTop() >= getDocumentHeight() - window.innerHeight) {
-                console.debug("next", nextPage);
+                if (nextPage) {
+                    await loadMorePosts(nextPage)
+                        .then((data) => {
+                            setPosts(posts.concat(data.posts));
+                            setNextPage(data.nextPage);
+                        })
+                        .catch(console.error);
+                }
             }
         };
 
@@ -36,7 +51,7 @@ const Index: NextPage<IndexPageProps> = (props) => {
             <NextSeo title={"MarcusBlog"} description={"Ilya Konstantinov web developer"} />
             <Container className="pt-3">
                 <Row>
-                    {props.posts.map((i) => (
+                    {posts.map((i) => (
                         <Col xs={12} key={i.id}>
                             <PostCard
                                 title={i.title}
