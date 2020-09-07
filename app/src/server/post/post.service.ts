@@ -11,14 +11,14 @@ export class PostService {
         private readonly logger: Logger,
     ) {}
 
-    async get(page: number): Promise<{ nextPage: number | null; items: Post[] }> {
+    async get(page: number, limit: number): Promise<{ nextPage: number | null; items: Post[] }> {
         let posts: Post[] = [];
         let nextPage = null;
 
         await this.api
             .query(Prismic.Predicates.at("document.type", "post"), {
                 orderings: "[document.first_publication_date desc]",
-                pageSize: 10,
+                pageSize: limit,
                 page,
             })
             .then((data) => {
