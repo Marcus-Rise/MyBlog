@@ -1,5 +1,5 @@
 import { IndexPageProps } from "../dto/IndexPageProps";
-import React from "react";
+import React, { useState } from "react";
 import { NextPage, NextPageContext } from "next";
 import { PostCard } from "../components/PostCard";
 import { NextSeo } from "next-seo";
@@ -8,6 +8,8 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 
 const Index: NextPage<IndexPageProps> = (props) => {
+    const [nextPage, setNextPage] = useState<number | null>(props.nextPage);
+
     return (
         <React.Fragment>
             <NextSeo title={"MarcusBlog"} description={"Ilya Konstantinov web developer"} />

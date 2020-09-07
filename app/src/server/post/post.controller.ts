@@ -23,9 +23,9 @@ export class PostController {
     @Get(INDEX_PAGE_URL)
     @Render("index")
     async index(): Promise<IndexPageProps> {
-        const posts = await this.postService.get();
+        const { items, nextPage } = await this.postService.get(1);
 
-        return { posts: posts.map((i) => new PostListItemDto(i)) };
+        return { nextPage, posts: items.map((i) => new PostListItemDto(i)) };
     }
 
     @CacheTTL(20)
