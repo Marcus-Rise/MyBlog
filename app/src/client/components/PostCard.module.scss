@@ -1,0 +1,14 @@
+.description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+
+  @media (min-width: 1024px){
+    -webkit-line-clamp: 7;
+  }
+
+  @media (max-width: 425px){
+    -webkit-line-clamp: 5;
+  }
+}

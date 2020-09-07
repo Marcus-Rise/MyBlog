@@ -2,6 +2,7 @@ import React from "react";
 import { POST_PAGE_URL } from "../dto/PostPageProps";
 import { PostHeader } from "./PostHeader";
 import Card from "react-bootstrap/Card";
+import styles from "./PostCard.module.scss";
 
 interface IProps {
     title: string;
@@ -21,7 +22,7 @@ export const PostCard: React.FC<IProps> = (props) => {
                     createdAt={props.createdAt}
                     link={`${POST_PAGE_URL}/${props.slug}`}
                 />
-                <Card.Text>{props.description}</Card.Text>
+                <Card.Text className={styles.description}>{props.description}</Card.Text>
             </Card.Body>
         </Card>
     );
