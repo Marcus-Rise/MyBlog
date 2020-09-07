@@ -42,9 +42,7 @@
     "react-icons": "^3.11.0",
     "react-markdown": "^4.3.1",
     "reflect-metadata": "^0.1.13",
-    "roboto-fontface": "^0.10.0",
-    "rxjs": "^6.6.2",
-    "sass": "^1.26.10"
+    "rxjs": "^6.6.2"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.4.1",
@@ -67,6 +65,7 @@
     "eslint": "^7.7.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-import": "^2.22.0",
+    "sass": "^1.26.10",
     "eslint-plugin-react": "^7.20.6",
     "jest": "^26.4.0",
     "next-pwa": "^3.1.3",
