@@ -3,16 +3,14 @@ stages:
   - prepare
   - deploy
 
-services:
-  - docker:dind
-
 variables:
   IMAGE_STAGED: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}
   IMAGE_RELEASE: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}
 
 build:
   stage: build
-  image: docker
+  tags:
+    - build
   before_script:
     - export DOCKER_BUILDKIT=1
     - export COMPOSE_DOCKER_CLI_BUILD=1
@@ -32,7 +30,8 @@ rename:
     - tags
   dependencies:
     - build
-  image: docker
+  tags:
+    - build
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
