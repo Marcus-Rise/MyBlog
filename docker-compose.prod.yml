@@ -9,14 +9,26 @@ services:
       API_END_POINT: ${API_END_POINT}
       ALLOWED_CONTENT_ORIGIN: ${ALLOWED_CONTENT_ORIGIN}
 
-  ingress:
-    image: ${CONTAINER_REGISTRY}-ingress
+  web:
+    image: ${CONTAINER_REGISTRY}-web
     links:
       - app
-    ports:
-      - 8080:80
     volumes:
       - static:/etc/nginx/html/_next:ro
 
+  ingress:
+    image: ${CONTAINER_REGISTRY}-ingress
+    links:
+      - web
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ssl:/var/lib/https-portal
+    environment:
+      DOMAINS: "${DOMAIN} -> http://web"
+      STAGE: "production"
+
 volumes:
   static:
+  ssl:

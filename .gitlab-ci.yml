@@ -1,27 +1,27 @@
 stages:
   - build
   - prepare
-
-services:
-  - docker:dind
+  - deploy
 
 variables:
   IMAGE_STAGED: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}
   IMAGE_RELEASE: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}
 
-before_script:
-  - export DOCKER_BUILDKIT=1
-  - export COMPOSE_DOCKER_CLI_BUILD=1
-  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-
 build:
   stage: build
-  image: docker
+  tags:
+    - build
+  before_script:
+    - export DOCKER_BUILDKIT=1
+    - export COMPOSE_DOCKER_CLI_BUILD=1
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
     - echo ${IMAGE_STAGED}
     - docker build --target prod -t ${IMAGE_STAGED}-app app
-    - docker build --target prod -t ${IMAGE_STAGED}-ingress docker/nginx
+    - docker build --target prod -t ${IMAGE_STAGED}-web docker/nginx
+    - docker build -t ${IMAGE_STAGED}-ingress docker/ingress
     - docker push ${IMAGE_STAGED}-app
+    - docker push ${IMAGE_STAGED}-web
     - docker push ${IMAGE_STAGED}-ingress
 
 rename:
@@ -30,11 +30,34 @@ rename:
     - tags
   dependencies:
     - build
-  image: docker
+  tags:
+    - build
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
     - docker image tag ${IMAGE_STAGED}-app ${IMAGE_RELEASE}-app
+    - docker image tag ${IMAGE_STAGED}-web ${IMAGE_RELEASE}-web
     - docker image tag ${IMAGE_STAGED}-ingress ${IMAGE_RELEASE}-ingress
     - docker push ${IMAGE_RELEASE}-app
+    - docker push ${IMAGE_RELEASE}-web
     - docker push ${IMAGE_RELEASE}-ingress
 
+dev:
+  stage: deploy
+  tags:
+    - deploy
+  when: manual
+  except:
+    - tags
+  dependencies:
+    - build
+  variables:
+    COMPOSE_PROJECT_NAME: my-blog-dev
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - export CONTAINER_REGISTRY="${IMAGE_STAGED}"
+  script:
+    - docker-compose -f docker-compose.prod.yml up -d --remove-orphans
+  environment:
+    name: dev
 
