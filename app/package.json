@@ -40,6 +40,7 @@
     "react-dom": "^16.13.1",
     "react-gist": "^1.2.2",
     "react-icons": "^3.11.0",
+    "react-loading-skeleton": "^2.1.1",
     "react-markdown": "^4.3.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.6.2"

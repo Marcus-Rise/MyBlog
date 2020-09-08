@@ -11,21 +11,32 @@ export class PostService {
         private readonly logger: Logger,
     ) {}
 
-    async get(): Promise<Post[]> {
+    async get(page: number, limit: number): Promise<{ nextPage: number | null; items: Post[] }> {
         let posts: Post[] = [];
+        let nextPage = null;
 
         await this.api
             .query(Prismic.Predicates.at("document.type", "post"), {
                 orderings: "[document.first_publication_date desc]",
+                pageSize: limit,
+                page,
             })
             .then((data) => {
                 posts = data.results.map((i) => new Post(i));
+
+                if (data.next_page) {
+                    const find = data.next_page.match(/page=(\d)/);
+
+                    if (find) {
+                        nextPage = Number(find[1]);
+                    }
+                }
             })
             .catch((e) => {
                 this.logger.error(e, e, PostService.name);
             });
 
-        return posts;
+        return { nextPage, items: posts };
     }
 
     async getBySlug(slug: string): Promise<Post | null> {
