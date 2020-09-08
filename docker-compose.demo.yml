@@ -35,6 +35,7 @@ services:
     environment:
       DOMAINS: "${DOMAIN} -> http://web"
       STAGE: "local"
+      LISTEN_IPV6: "true"
 
 volumes:
   static:
