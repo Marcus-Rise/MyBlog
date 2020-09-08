@@ -10,14 +10,13 @@ variables:
   IMAGE_STAGED: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}
   IMAGE_RELEASE: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}
 
-before_script:
-  - export DOCKER_BUILDKIT=1
-  - export COMPOSE_DOCKER_CLI_BUILD=1
-  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-
 build:
   stage: build
   image: docker
+  before_script:
+    - export DOCKER_BUILDKIT=1
+    - export COMPOSE_DOCKER_CLI_BUILD=1
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
     - echo ${IMAGE_STAGED}
     - docker build --target prod -t ${IMAGE_STAGED}-app app
@@ -34,6 +33,8 @@ rename:
   dependencies:
     - build
   image: docker
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
     - docker image tag ${IMAGE_STAGED}-app ${IMAGE_RELEASE}-app
     - docker image tag ${IMAGE_STAGED}-web ${IMAGE_RELEASE}-web
@@ -53,9 +54,11 @@ dev:
     - build
   variables:
     COMPOSE_PROJECT_NAME: my-blog-dev
-    CONTAINER_REGISTRY: "${IMAGE_STAGED}"
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - export CONTAINER_REGISTRY="${IMAGE_STAGED}"
   script:
     - docker-compose -f docker-compose.prod.yml up -d --remove-orphans
   environment:
     name: dev
-    url: https://blog-dev.marcus-rise.dev/
+
