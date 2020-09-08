@@ -24,10 +24,12 @@ export class PostService {
             .then((data) => {
                 posts = data.results.map((i) => new Post(i));
 
-                const find = data.next_page.match(/page=(\d)/);
+                if (data.next_page) {
+                    const find = data.next_page.match(/page=(\d)/);
 
-                if (find) {
-                    nextPage = Number(find[1]);
+                    if (find) {
+                        nextPage = Number(find[1]);
+                    }
                 }
             })
             .catch((e) => {
