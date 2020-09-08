@@ -22,7 +22,7 @@ build:
     - echo ${IMAGE_STAGED}
     - docker build --target prod -t ${IMAGE_STAGED}-app app
     - docker build --target prod -t ${IMAGE_STAGED}-web docker/nginx
-    - docker build --target prod -t ${IMAGE_STAGED}-ingress docker/ingress
+    - docker build -t ${IMAGE_STAGED}-ingress docker/ingress
     - docker push ${IMAGE_STAGED}-app
     - docker push ${IMAGE_STAGED}-web
     - docker push ${IMAGE_STAGED}-ingress
