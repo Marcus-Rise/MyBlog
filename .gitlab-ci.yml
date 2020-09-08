@@ -42,9 +42,7 @@ dev:
   stage: deploy
   tags:
     - deploy
-  only:
-    - master
-    - merge_requests
+  when: manual
   except:
     - tags
   dependencies:
