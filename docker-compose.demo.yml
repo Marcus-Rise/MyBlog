@@ -31,11 +31,11 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - ./docker/ingress/ssl:/var/lib/https-portal
+      - ssl:/var/lib/https-portal
     environment:
       DOMAINS: "${DOMAIN} -> http://web"
       STAGE: "local"
-      LISTEN_IPV6: "true"
 
 volumes:
   static:
+  ssl:
