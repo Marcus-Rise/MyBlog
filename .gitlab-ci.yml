@@ -21,8 +21,10 @@ build:
   script:
     - echo ${IMAGE_STAGED}
     - docker build --target prod -t ${IMAGE_STAGED}-app app
-    - docker build --target prod -t ${IMAGE_STAGED}-ingress docker/nginx
+    - docker build --target prod -t ${IMAGE_STAGED}-web docker/nginx
+    - docker build --target prod -t ${IMAGE_STAGED}-ingress docker/ingress
     - docker push ${IMAGE_STAGED}-app
+    - docker push ${IMAGE_STAGED}-web
     - docker push ${IMAGE_STAGED}-ingress
 
 rename:
@@ -34,8 +36,10 @@ rename:
   image: docker
   script:
     - docker image tag ${IMAGE_STAGED}-app ${IMAGE_RELEASE}-app
+    - docker image tag ${IMAGE_STAGED}-web ${IMAGE_RELEASE}-web
     - docker image tag ${IMAGE_STAGED}-ingress ${IMAGE_RELEASE}-ingress
     - docker push ${IMAGE_RELEASE}-app
+    - docker push ${IMAGE_RELEASE}-web
     - docker push ${IMAGE_RELEASE}-ingress
 
 dev:
@@ -49,6 +53,7 @@ dev:
     - build
   variables:
     COMPOSE_PROJECT_NAME: my-blog-dev
+    CONTAINER_REGISTRY: $IMAGE_STAGED
   script:
     - docker-compose -f docker-compose.prod.yml up -d --remove-orphans
   environment:

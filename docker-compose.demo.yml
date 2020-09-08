@@ -11,7 +11,7 @@ services:
       API_END_POINT: ${API_END_POINT}
       ALLOWED_CONTENT_ORIGIN: ${ALLOWED_CONTENT_ORIGIN}
 
-  ingress:
+  web:
     build:
       context: docker/nginx
       target: "prod"
@@ -21,6 +21,20 @@ services:
       - 8080:80
     volumes:
       - static:/etc/nginx/html/_next:ro
+
+  ingress:
+    build:
+      context: docker/ingress
+    links:
+      - web
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./docker/ingress/ssl:/var/lib/https-portal
+    environment:
+      DOMAINS: "${DOMAIN} -> http://web"
+      STAGE: "local"
 
 volumes:
   static:
