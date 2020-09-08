@@ -53,7 +53,7 @@ dev:
     - build
   variables:
     COMPOSE_PROJECT_NAME: my-blog-dev
-    CONTAINER_REGISTRY: $IMAGE_STAGED
+    CONTAINER_REGISTRY: "${IMAGE_STAGED}"
   script:
     - docker-compose -f docker-compose.prod.yml up -d --remove-orphans
   environment:
