@@ -1,7 +1,7 @@
 import { IndexPageProps } from "../dto/IndexPageProps";
 import React, { Suspense, useEffect, useState } from "react";
 import { NextPage, NextPageContext } from "next";
-import { PostCard } from "../components/PostCard";
+import { PostCard, PostSkeleton } from "../components/PostCard";
 import { NextSeo } from "next-seo";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
@@ -66,9 +66,13 @@ const Index: NextPage<IndexPageProps> = (props) => {
                 </Row>
                 {isLoading && nextPage && (
                     <Row>
-                        <Suspense fallback={<div>Loading...</div>}>
-                            <LazyLoadPortion page={nextPage} loaded={loaded} />
-                        </Suspense>
+                        <Col>
+                            <Suspense fallback={<PostSkeleton />}>
+                                <LazyLoadPortion page={nextPage} loaded={loaded}>
+                                    <PostSkeleton />
+                                </LazyLoadPortion>
+                            </Suspense>
+                        </Col>
                     </Row>
                 )}
             </Container>

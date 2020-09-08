@@ -16,7 +16,7 @@ export const LoadPostListPortion: React.FC<IProps> = (props) => {
         loadMorePosts(props.page).then(props.loaded).catch(console.error);
     }, []);
 
-    return <div>Loading</div>;
+    return <React.Fragment>{props.children}</React.Fragment>;
 };
 
 export default LoadPostListPortion;
