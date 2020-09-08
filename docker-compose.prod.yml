@@ -27,7 +27,7 @@ services:
       - ./docker/ingress/ssl:/var/lib/https-portal
     environment:
       DOMAINS: "${DOMAIN} -> http://web"
-      STAGE: "staging"
+      STAGE: "production"
       LISTEN_IPV6: "true"
 
 volumes:
