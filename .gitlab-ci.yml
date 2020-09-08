@@ -1,6 +1,7 @@
 stages:
   - build
   - prepare
+  - deploy
 
 services:
   - docker:dind
@@ -37,4 +38,21 @@ rename:
     - docker push ${IMAGE_RELEASE}-app
     - docker push ${IMAGE_RELEASE}-ingress
 
-
+dev:
+  stage: deploy
+  tags:
+    - deploy
+  only:
+    - master
+    - merge_requests
+  except:
+    - tags
+  dependencies:
+    - build
+  variables:
+    COMPOSE_PROJECT_NAME: my-blog-dev
+  script:
+    - docker-compose -f docker-compose.prod.yml up -d --remove-orphans
+  environment:
+    name: dev
+    url: https://blog-dev.marcus-rise.dev/
