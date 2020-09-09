@@ -1,6 +1,10 @@
 .footer {
   background-color: var(--gray-dark);
   color: white;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: #3d4752;
+  }
 }
 
 .link {
