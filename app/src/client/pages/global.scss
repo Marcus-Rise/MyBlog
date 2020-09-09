@@ -6,3 +6,17 @@
 #__next {
   height: 100% !important;
 }
+
+@media (prefers-color-scheme: light) {
+  body {
+    background-color: var(--light);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: var(--dark);
+    color: var(--light);
+  }
+}
+
