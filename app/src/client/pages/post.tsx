@@ -7,13 +7,14 @@ import { NextSeo } from "next-seo";
 import { PostHeader } from "../components/PostHeader";
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
+import cardStyles from "./post-page.module.scss";
 
 const Post: NextPage<PostPageProps> = ({ post }) => {
     return (
         <React.Fragment>
             <NextSeo title={`MarcusBlog | ${post.title}`} description={post.description} />
             <Container>
-                <Card className="pt-3 border-0">
+                <Card className={`mt-3 border-0 ${cardStyles.card}`}>
                     <Card.Body>
                         <PostHeader tags={post.tags} title={post.title} createdAt={post.createdAt} />
                         <Card.Text>
