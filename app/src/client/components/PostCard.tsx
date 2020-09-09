@@ -11,11 +11,12 @@ interface IProps {
     tags: string[];
     description: string;
     createdAt: string;
+    className?: string;
 }
 
 export const PostCard: React.FC<IProps> = (props) => {
     return (
-        <Card className="border-0">
+        <Card className={`border-0 ${styles.card} ` + props.className}>
             <Card.Body>
                 <PostHeader
                     tags={props.tags}
@@ -31,7 +32,7 @@ export const PostCard: React.FC<IProps> = (props) => {
 
 export const PostSkeleton: React.FC = () => {
     return (
-        <Card className="border-0">
+        <Card className={`border-0 ${styles.card}`}>
             <Card.Body>
                 <Skeleton height={"2.25rem"} width={"75%"} />
                 <br />
